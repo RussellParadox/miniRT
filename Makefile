@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2023/12/18 07:53:56 by gdornic          ###   ########.fr        #
+#    Updated: 2023/12/19 10:19:51 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIB_LINK = $(addprefix -L, $(DEP)) -lmlx_Linux -l42 -L/usr/lib -lXext -lX11 -lm 
 
 SRC = main.c
 
-OBJ = $(addprefix src/, $(SRC:.c=.o))
+OBJ = $(addprefix obj/, $(SRC:.c=.o))
 
 CC = gcc
 
@@ -38,7 +38,7 @@ $(NAME): $(OBJ)
 	$(call make_dep,all)
 	$(CC) $(OBJ) $(HEADERS) $(LIB_LINK) -o $(NAME)
 
-%.o: %.c
+obj/%.o: src/%.c
 	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 clean:
