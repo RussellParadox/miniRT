@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2023/12/19 10:19:51 by gdornic          ###   ########.fr        #
+#    Updated: 2023/12/29 12:19:50 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,11 @@ NAME = miniRT
 
 DEP = $(addprefix dep/, lib42 mlx_linux)
 
-HEADERS = $(addprefix -I, $(DEP)) -I/usr/include
+HEADERS = $(addprefix -I, $(DEP)) -I/usr/include -Isrc
 
 LIB_LINK = $(addprefix -L, $(DEP)) -lmlx_Linux -l42 -L/usr/lib -lXext -lX11 -lm -lz
 
-SRC = main.c
+SRC = $(addprefix view/, ) $(addprefix controller/, main.c) $(addprefix model/, )
 
 OBJ = $(addprefix obj/, $(SRC:.c=.o))
 
