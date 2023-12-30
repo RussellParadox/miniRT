@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 07:55:00 by gdornic           #+#    #+#             */
-/*   Updated: 2023/12/30 22:51:25 by gdornic          ###   ########.fr       */
+/*   Created: 2023/12/29 15:40:59 by gdornic           #+#    #+#             */
+/*   Updated: 2023/12/29 16:52:45 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	main(int argc, char *argv[])
+//loop on events hooks
+int	controller_loop(t_list	*scene)
 {
-	t_list	*scene;
-	int		status;
+	t_mlx	*mlx;
 
-	if (argument_check(argc, argv))
+	mlx = mlx_create();
+	if (mlx == NULL)
 		return (EXIT_FAILURE);
-	scene = scene_create(argv);
-	if (scene == NULL)
-		return (EXIT_FAILURE);
-	status = controller_loop(scene);
-	ft_lstclear(&scene, &object_free);
-	return (status);
+	events_hooks(mlx, scene);
+	mlx_loop(mlx->instance);
+	mlx_free(mlx);
+	return (EXIT_SUCCESS);
 }

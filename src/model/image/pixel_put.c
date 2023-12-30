@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pixel_put.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 07:55:00 by gdornic           #+#    #+#             */
-/*   Updated: 2023/12/30 22:51:25 by gdornic          ###   ########.fr       */
+/*   Created: 2023/12/30 23:50:45 by gdornic           #+#    #+#             */
+/*   Updated: 2023/12/31 00:16:45 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	main(int argc, char *argv[])
+void	image_pixel_put(t_img *image, int x, int y, int color)
 {
-	t_list	*scene;
-	int		status;
+	unsigned int	*pixel;
 
-	if (argument_check(argc, argv))
-		return (EXIT_FAILURE);
-	scene = scene_create(argv);
-	if (scene == NULL)
-		return (EXIT_FAILURE);
-	status = controller_loop(scene);
-	ft_lstclear(&scene, &object_free);
-	return (status);
+	pixel = (unsigned int *)(image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8)))
+	*pixel = color;
 }
