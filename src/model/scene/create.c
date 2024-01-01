@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events_hooks.c                                     :+:      :+:    :+:   */
+/*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/30 16:55:10 by gdornic           #+#    #+#             */
-/*   Updated: 2023/12/30 22:52:25 by gdornic          ###   ########.fr       */
+/*   Created: 2023/12/31 23:14:43 by gdornic           #+#    #+#             */
+/*   Updated: 2023/12/31 23:57:37 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	events_hooks(t_mlx *mlx, t_list *scene)
+t_list	*scene_create(int fd)
 {
-	void	*param[2];
+	t_list	*scene;
+	t_list	*new;
+	t_obj	*object;
 
-	param[0] = mlx;
-	param[1] = scene;
-	mlx_loop_hook(mlx->instance, &controller_routine, param);
+	object = next_object(fd);
+	while (object != NULL)
+	{
+		new = ft_lstnew(object);
+		if (new == NULL)
+			break ;
+		ft_lstadd_back(&scene, new);
+		object = next_object(fd);
+	}
+	if (errno == ENOMEM)
+		ft_lstclear(&scene, &object_free);
+	return (scene);
 }

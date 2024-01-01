@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
+/*   events_hooks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 15:40:59 by gdornic           #+#    #+#             */
-/*   Updated: 2023/12/31 22:59:27 by gdornic          ###   ########.fr       */
+/*   Created: 2023/12/30 16:55:10 by gdornic           #+#    #+#             */
+/*   Updated: 2023/12/31 23:00:41 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-//loop on events hooks
-int	controller_loop(t_list	*scene)
+void	hook_routine(t_mlx *mlx, t_list *scene)
 {
-	t_mlx	*mlx;
+	void	*param[2];
 
-	mlx = mlx_create();
-	if (mlx == NULL)
-		return (EXIT_FAILURE);
-	hook_routine(mlx, scene);
-	mlx_loop(mlx->instance);
-	mlx_free(mlx);
-	return (EXIT_SUCCESS);
+	param[0] = mlx;
+	param[1] = scene;
+	mlx_loop_hook(mlx->instance, &controller_routine, param);
 }
