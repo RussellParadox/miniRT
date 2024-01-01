@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2023/12/31 23:16:21 by gdornic          ###   ########.fr        #
+#    Updated: 2024/01/01 16:16:52 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,26 @@ HEADERS = $(addprefix -I, $(DEP)) -I/usr/include -Isrc
 
 LIB_LINK = $(addprefix -L, $(DEP)) -lmlx_Linux -l42 -L/usr/lib -lXext -lX11 -lm -lz
 
-SRC = $(addprefix view/, ) $(addprefix controller/, $(addprefix hook/, routine.c) $(addprefix image/, pixel_put.c) $(addprefix canva/, pixel_put.c) main.c loop.c routine.c) $(addprefix model/, $(addprefix scene/, create.c))
+SRC = 	$(addprefix view/, ) \
+		$(addprefix controller/, \
+			$(addprefix hook/, routine.c) \
+			$(addprefix image/, pixel_put.c) \
+			$(addprefix canva/, pixel_put.c) \
+			main.c loop.c routine.c) \
+		$(addprefix model/, \
+			$(addprefix scene/, \
+				$(addprefix vector/, ) \
+				$(addprefix color/, ) \
+				$(addprefix object/, \
+					$(addprefix ambient_lightning/, create.c) \
+					$(addprefix camera/, create.c) \
+					$(addprefix cylinder/, create.c) \
+					$(addprefix light/, create.c) \
+					$(addprefix plane/, create.c) \
+					$(addprefix sphere/, create.c) \
+					next_object.c create.c) \
+				create.c) \
+			)
 
 OBJ = $(addprefix obj/, $(SRC:.c=.o))
 
