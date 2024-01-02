@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/01 16:16:03 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/02 17:03:49 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ typedef struct s_vector
 	float	y;
 	float	z;
 }	t_vector;
+//create
+t_vector	*vector_create(char *x, char *y, char *z);
+//free
+void	*vector_free(t_vector *vector);
 
 /*->->color*/
 typedef struct s_color
@@ -81,6 +85,10 @@ typedef struct s_color
 	int	green;
 	int	blue;
 }	t_color;
+//create
+t_color	*color_create(char *red, char *green, char *blue);
+//free
+void	*color_free(t_color *color);
 
 /*->->->ambient_lightning*/
 typedef struct s_ambient_lightning
@@ -89,6 +97,9 @@ typedef struct s_ambient_lightning
 	t_color	*color;
 }	t_ambient_lightning;
 //create
+t_ambient_lightning	*ambient_lightning_create(char **data);
+//free
+void	*ambient_lightning_free(t_ambient_lightning *ambient_lightning);
 
 /*->->->camera*/
 typedef struct s_camera
@@ -97,6 +108,10 @@ typedef struct s_camera
 	t_vector	*orientation;
 	float		fov;
 }	t_camera;
+//create
+t_camera	*camera_create(char **data);
+//free
+void	*camera_free(t_camera *camera);
 
 /*->->->light*/
 typedef struct s_light
@@ -105,6 +120,10 @@ typedef struct s_light
 	float		ratio;
 	t_color		*color;
 }	t_light;
+//create
+t_light	*light_create(char **data);
+//free
+void	*light_free(t_light *light);
 
 /*->->->sphere*/
 typedef struct s_sphere
@@ -113,6 +132,10 @@ typedef struct s_sphere
 	float		diameter;
 	t_color		*color;
 }	t_sphere;
+//create
+t_sphere	*sphere_create(char **data);
+//free
+void	*sphere_free(t_sphere *sphere);
 
 /*->->->plane*/
 typedef struct s_plane
@@ -121,6 +144,10 @@ typedef struct s_plane
 	t_vector	*normal;
 	t_color		*color;
 }	t_plane;
+//create
+t_plane	*plane_create(char **data);
+//free
+void	*plane_free(t_plane *plane);
 
 /*->->->cylinder*/
 typedef struct s_cylinder
@@ -131,6 +158,10 @@ typedef struct s_cylinder
 	float		height;
 	t_color		*color;
 }	t_cylinder;
+//create
+t_cylinder	*cylinder_create(char **data);
+//free
+void	*cylinder_free(t_cylinder *cylinder);
 
 /*view*/
 

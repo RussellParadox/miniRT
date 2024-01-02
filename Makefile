@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/01/01 16:16:52 by gdornic          ###   ########.fr        #
+#    Updated: 2024/01/02 17:03:55 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,15 +26,15 @@ SRC = 	$(addprefix view/, ) \
 			main.c loop.c routine.c) \
 		$(addprefix model/, \
 			$(addprefix scene/, \
-				$(addprefix vector/, ) \
-				$(addprefix color/, ) \
 				$(addprefix object/, \
-					$(addprefix ambient_lightning/, create.c) \
-					$(addprefix camera/, create.c) \
-					$(addprefix cylinder/, create.c) \
-					$(addprefix light/, create.c) \
-					$(addprefix plane/, create.c) \
-					$(addprefix sphere/, create.c) \
+					$(addprefix color/, create.c free.c) \
+					$(addprefix vector/, create.c free.c) \
+					$(addprefix ambient_lightning/, create.c free.c) \
+					$(addprefix camera/, create.c free.c) \
+					$(addprefix cylinder/, create.c free.c) \
+					$(addprefix light/, create.c free.c) \
+					$(addprefix plane/, create.c free.c) \
+					$(addprefix sphere/, create.c free.c) \
 					next_object.c create.c) \
 				create.c) \
 			)
