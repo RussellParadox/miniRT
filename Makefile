@@ -6,17 +6,17 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/01/02 17:03:55 by gdornic          ###   ########.fr        #
+#    Updated: 2024/01/03 09:01:59 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 
-DEP = $(addprefix dep/, lib42 mlx_linux)
+DEP = $(addprefix dep/, lib42 mlx_linux toolbox)
 
 HEADERS = $(addprefix -I, $(DEP)) -I/usr/include -Isrc
 
-LIB_LINK = $(addprefix -L, $(DEP)) -lmlx_Linux -l42 -L/usr/lib -lXext -lX11 -lm -lz
+LIB_LINK = $(addprefix -L, $(DEP)) -lmlx_Linux -l42 -ltoolbox -L/usr/lib -lXext -lX11 -lm -lz
 
 SRC = 	$(addprefix view/, ) \
 		$(addprefix controller/, \
@@ -35,8 +35,8 @@ SRC = 	$(addprefix view/, ) \
 					$(addprefix light/, create.c free.c) \
 					$(addprefix plane/, create.c free.c) \
 					$(addprefix sphere/, create.c free.c) \
-					next_object.c create.c) \
-				create.c) \
+					next_object.c create.c free.c) \
+				create.c free.c) \
 			)
 
 OBJ = $(addprefix obj/, $(SRC:.c=.o))

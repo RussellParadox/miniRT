@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/02 17:03:49 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:25:18 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <stdlib.h>
 # include <errno.h>
 # include <math.h>
+# include <toolbox.h>
 
 /*controller*/
 //loop
@@ -44,27 +45,10 @@ void	hook_routine(t_mlx *mlx, t_list *scene);
 
 /*model*/
 /*->scene*/
-t_list	*scene_create(int fd);
-
-/*->->object*/
-# define ID_LEN_MAX 100
-typedef struct s_obj
-{
-	char	id[ID_LEN_MAX];
-	union
-	{
-		t_ambient_lightning	*ambient_lightning;
-		t_camera			*camera;
-		t_light				*light;
-		t_sphere			*sphere;
-		t_plane				*plane;
-		t_cylinder			*cylinder;
-	};
-}	t_obj;
-//next object
-t_obj	*next_object(int fd);
 //create
-t_obj	*object_create(char **data);
+t_list	*scene_create(int fd);
+//free
+void	*scene_free(t_list *scene);
 
 /*->->vector*/
 typedef struct s_vector
@@ -162,6 +146,28 @@ typedef struct s_cylinder
 t_cylinder	*cylinder_create(char **data);
 //free
 void	*cylinder_free(t_cylinder *cylinder);
+
+/*->->object*/
+# define ID_LEN_MAX 100
+typedef struct s_obj
+{
+	char	id[ID_LEN_MAX];
+	union
+	{
+		t_ambient_lightning	*ambient_lightning;
+		t_camera			*camera;
+		t_light				*light;
+		t_sphere			*sphere;
+		t_plane				*plane;
+		t_cylinder			*cylinder;
+	};
+}	t_obj;
+//next object
+t_obj	*next_object(int fd);
+//create
+t_obj	*object_create(char **data);
+//free
+void	*object_free(t_obj *object);
 
 /*view*/
 
