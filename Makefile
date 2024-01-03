@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/01/03 17:03:10 by gdornic          ###   ########.fr        #
+#    Updated: 2024/01/03 23:02:05 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ LIB_LINK = $(addprefix -L, $(DEP)) -lmlx_Linux -l42 -ltoolbox -L/usr/lib -lXext 
 
 SRC = 	$(addprefix view/, ) \
 		$(addprefix controller/, \
-			$(addprefix mlx/, create.c) \
-			$(addprefix hook/, routine.c) \
+			$(addprefix mlx/, create.c free.c) \
+			$(addprefix hook/, routine.c loop_end.c) \
 			$(addprefix image/, pixel_put.c) \
 			$(addprefix canva/, pixel_put.c) \
 			main.c loop.c routine.c) \

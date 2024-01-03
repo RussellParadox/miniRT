@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/03 17:02:35 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/03 23:01:38 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_mlx
 }	t_mlx;
 //create
 t_mlx	*mlx_create(int width, int height, char *name);
+//free
+void	*mlx_free(t_mlx *mlx);
 
 /*->canva*/
 void	canva_pixel_put(t_img *canva, int x, int y, int color);
@@ -50,6 +52,8 @@ void	image_pixel_put(t_img *image, int x, int y, int color);
 /*->hook*/
 //routine
 void	hook_routine(t_mlx *mlx, t_list *scene);
+//loop end
+int	loop_end_hook(void *param[2]);
 
 /*model*/
 /*->scene*/

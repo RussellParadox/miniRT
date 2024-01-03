@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   loop_end.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 22:43:56 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/03 23:00:56 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/03 22:54:02 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/03 22:59:53 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	hook_routine(t_mlx *mlx, t_list *scene)
+int	loop_end_hook(void *param[2])
 {
-	void	*param[2];
+	t_mlx	*mlx;
 
-	param[0] = mlx;
-	param[1] = scene;
-	mlx_hook(mlx->window, ON_DESTROY, (0L), &loop_end_hook, param);
-	mlx_loop_hook(mlx->instance, &controller_routine, param);
+	mlx = param[0];
+	mlx_loop_end(mlx->instance);
+	return (0);
 }
