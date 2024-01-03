@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/03 16:25:18 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/03 17:02:35 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@
 int		controller_loop(t_list	*scene);
 //routine
 int		controller_routine(void *param[2]);
+/*->mlx*/
+typedef struct s_mlx
+{
+	void	*instance;
+	void	*window;
+}	t_mlx;
+//create
+t_mlx	*mlx_create(int width, int height, char *name);
 
 /*->canva*/
 void	canva_pixel_put(t_img *canva, int x, int y, int color);

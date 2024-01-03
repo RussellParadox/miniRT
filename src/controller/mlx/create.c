@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
+/*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 15:40:59 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/03 17:02:09 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/03 16:40:35 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/03 17:01:53 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-//loop on events hooks
-int	controller_loop(t_list	*scene)
+t_mlx	*mlx_create(int width, int height, char *name)
 {
 	t_mlx	*mlx;
 
-	mlx = mlx_create(WINDOW_WIDTH, WINDOW_HEIGHT, "miniRT");
+	mlx = malloc(sizeof(t_mlx));
 	if (mlx == NULL)
-		return (EXIT_FAILURE);
-	hook_routine(mlx, scene);
-	mlx_loop(mlx->instance);
-	mlx_free(mlx);
-	return (EXIT_SUCCESS);
+		return (NULL);
+	mlx->instance = mlx_init();
+	if (mlx->instance == NULL)
+	{
+		free(mlx);
+		return (NULL);
+	}
+	mlx->window = mlx_new_window(mlx->instance, width, height, name);
+	return (mlx);
 }
