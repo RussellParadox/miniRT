@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/03 23:01:38 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/04 10:22:07 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		controller_loop(t_list	*scene);
 //routine
 int		controller_routine(void *param[2]);
 /*->mlx*/
+# define WINDOW_WIDTH 700
+# define WINDOW_HEIGHT 700
 typedef struct s_mlx
 {
 	void	*instance;
@@ -42,18 +44,39 @@ t_mlx	*mlx_create(int width, int height, char *name);
 //free
 void	*mlx_free(t_mlx *mlx);
 
-/*->canva*/
-void	canva_pixel_put(t_img *canva, int x, int y, int color);
-
 /*->image*/
+typedef struct s_img
+{
+	void	*instance;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}	t_img;
+//create
+t_img	*image_create(t_mlx *mlx, int width, int height);
+//free
+void	image_free(t_img *image, t_mlx *mlx);
 //pixel put
 void	image_pixel_put(t_img *image, int x, int y, int color);
+/*->color_trgb*/
+//create
+int	trgb_create(int t, int r, int g, int b);
+
+/*->canva*/
+void	canva_pixel_put(t_img *canva, int x, int y, int color);
 
 /*->hook*/
 //routine
 void	hook_routine(t_mlx *mlx, t_list *scene);
 //loop end
 int	loop_end_hook(void *param[2]);
+
+/*renderer*/
+//draw circle
+void	draw_circle(t_img *canva, int origin_x, int origin_y, int radius);
 
 /*model*/
 /*->scene*/
@@ -179,8 +202,10 @@ t_obj	*next_object(int fd);
 //create
 t_obj	*object_create(char **data);
 //free
-void	*object_free(t_obj *object);
+void	object_free(void *content);
 
 /*view*/
+//routine
+void	view_routine(t_img *image, t_mlx *mlx);
 
 #endif

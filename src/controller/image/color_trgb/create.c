@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixel_put.c                                        :+:      :+:    :+:   */
+/*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/30 23:50:45 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/03 23:21:24 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/04 10:18:02 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/04 10:20:41 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	image_pixel_put(t_img *image, int x, int y, int color)
+int	trgb_create(int t, int r, int g, int b)
 {
-	unsigned int	*pixel;
-
-	pixel = (unsigned int *)(image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8)));
-	*pixel = color;
+	return (t << 24 | r << 16 | g << 8 | b);
 }

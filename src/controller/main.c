@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:55:00 by gdornic           #+#    #+#             */
-/*   Updated: 2023/12/31 23:49:47 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/04 00:07:06 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,18 @@ int	main(int argc, char *argv[])
 	int		fd;
 	int		status;
 
+	errno = 0;
+	(void)argc;
+ /*
 	if (argument_check(argc, argv))
 		return (EXIT_FAILURE);
-	fd = open(argv[1]);
+*/
+	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (EXIT_FAILURE);
 	scene = scene_create(fd);
 	close(fd);
-	if (scene == NULL)
+	if (errno == ENOMEM)
 		return (EXIT_FAILURE);
 	status = controller_loop(scene);
 	ft_lstclear(&scene, &object_free);

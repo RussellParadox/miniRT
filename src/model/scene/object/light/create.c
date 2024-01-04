@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:16:20 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/02 16:28:08 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/03 23:46:12 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ static void	light_init(t_light *light, char **data)
 {
 	char	**split;
 
-	split = ft_split(data[1]);
+	split = ft_split(data[1], ',');
 	if (split == NULL)
 		return ;
 	light->coordinate = vector_create(split[0], split[1], split[2]);
 	array_free(split, 2);
 	if (light->coordinate == NULL)
 		return ;
-	split = ft_split(data[3]);
+	split = ft_split(data[3], ',');
 	if (split == NULL)
 		return ;
 	light->color = color_create(split[0], split[1], split[2]);

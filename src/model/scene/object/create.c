@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 14:40:50 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/01 15:59:32 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/04 09:50:23 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_obj	*object_create(char **data)
 	object = malloc(sizeof(t_obj));
 	if (object == NULL)
 		return (NULL);
-	object->id = ft_strlcpy(object->id, data[0], ft_strlen(data[0]));
+	ft_strlcpy(object->id, data[0], ft_strlen(data[0]) + 1);
 	if (!ft_strncmp(data[0], "A", -1))
 		object->ambient_lightning = ambient_lightning_create(data);
 	else if (!ft_strncmp(data[0], "C", -1))

@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 15:51:41 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/02 16:33:42 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/04 09:46:17 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_ambient_lightning	*ambient_lightning_create(char **data)
 {
 	t_ambient_lightning	*ambient_lightning;
 
-	ambient_lightning = malloc(sizeof(ambient_lightning));
+	ambient_lightning = malloc(sizeof(t_ambient_lightning));
 	if (ambient_lightning == NULL)
 		return (NULL);
 	ambient_lightning->ratio = ascii_to_float(data[1]);

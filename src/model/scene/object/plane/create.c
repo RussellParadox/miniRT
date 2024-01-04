@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:37:15 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/02 16:49:34 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/03 23:46:44 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	plane_init(t_plane *plane, char **data)
 	if (split == NULL)
 		return ;
 	plane->color = color_create(split[0], split[1], split[2]);
-	array_free(split);
+	array_free(split, 2);
 	if (plane->color == NULL)
 		return ;
 }

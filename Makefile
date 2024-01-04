@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/01/03 23:02:05 by gdornic          ###   ########.fr        #
+#    Updated: 2024/01/04 10:20:03 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,14 @@ HEADERS = $(addprefix -I, $(DEP)) -I/usr/include -Isrc
 
 LIB_LINK = $(addprefix -L, $(DEP)) -lmlx_Linux -l42 -ltoolbox -L/usr/lib -lXext -lX11 -lm -lz
 
-SRC = 	$(addprefix view/, ) \
+SRC = 	$(addprefix view/, routine.c) \
 		$(addprefix controller/, \
+			$(addprefix renderer/, draw_circle.c) \
 			$(addprefix mlx/, create.c free.c) \
 			$(addprefix hook/, routine.c loop_end.c) \
-			$(addprefix image/, pixel_put.c) \
+			$(addprefix image/, \
+				$(addprefix color_trgb/, create.c) \
+				create.c pixel_put.c free.c) \
 			$(addprefix canva/, pixel_put.c) \
 			main.c loop.c routine.c) \
 		$(addprefix model/, \

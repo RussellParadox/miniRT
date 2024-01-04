@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixel_put.c                                        :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/30 23:50:45 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/03 23:21:24 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/03 23:28:39 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/04 10:01:36 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	image_pixel_put(t_img *image, int x, int y, int color)
+void	view_routine(t_img *image, t_mlx *mlx)
 {
-	unsigned int	*pixel;
-
-	pixel = (unsigned int *)(image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8)));
-	*pixel = color;
+	mlx_put_image_to_window(mlx->instance, mlx->window, image->instance, 0, 0);
 }

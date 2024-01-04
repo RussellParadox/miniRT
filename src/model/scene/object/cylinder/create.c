@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 15:47:07 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/02 16:06:54 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/03 23:45:18 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,11 @@ static void	cylinder_init(t_cylinder *cylinder, char **data)
 	array_free(split, 2);
 	if (cylinder->color == NULL)
 		return ;
-	return (cylinder);
 }
 
 t_cylinder	*cylinder_create(char **data)
 {
 	t_cylinder	*cylinder;
-	char		**split;
 
 	cylinder = malloc(sizeof(t_cylinder));
 	if (cylinder == NULL)
