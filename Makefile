@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/01/04 10:20:03 by gdornic          ###   ########.fr        #
+#    Updated: 2024/01/12 20:56:54 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,13 @@ LIB_LINK = $(addprefix -L, $(DEP)) -lmlx_Linux -l42 -ltoolbox -L/usr/lib -lXext 
 
 SRC = 	$(addprefix view/, routine.c) \
 		$(addprefix controller/, \
-			$(addprefix renderer/, draw_circle.c) \
+			$(addprefix renderer/, \
+				$(addprefix raytracing/, \
+					$(addprefix ray/, create.c free.c) \
+					$(addprefix viewport/, create.c free.c) \
+					$(addprefix intersection/, sphere.c plane.c) \
+					intersect.c method.c render.c) \
+				draw_circle.c) \
 			$(addprefix mlx/, create.c free.c) \
 			$(addprefix hook/, routine.c loop_end.c) \
 			$(addprefix image/, \
@@ -32,14 +38,14 @@ SRC = 	$(addprefix view/, routine.c) \
 			$(addprefix scene/, \
 				$(addprefix object/, \
 					$(addprefix color/, create.c free.c) \
-					$(addprefix vector/, create.c free.c) \
+					$(addprefix vector/, create.c free.c scalar_product.c) \
 					$(addprefix ambient_lightning/, create.c free.c) \
 					$(addprefix camera/, create.c free.c) \
 					$(addprefix cylinder/, create.c free.c) \
 					$(addprefix light/, create.c free.c) \
 					$(addprefix plane/, create.c free.c) \
 					$(addprefix sphere/, create.c free.c) \
-					next_object.c create.c free.c) \
+					find_method.c color_method.c next_object.c create.c free.c) \
 				create.c free.c) \
 			)
 

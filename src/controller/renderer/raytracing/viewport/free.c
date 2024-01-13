@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 15:44:27 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/11 17:18:24 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/12 13:37:19 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/12 13:42:04 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	*color_free(t_color *color)
+void	*viewport_free(t_viewport *viewport)
 {
-	free(color);
+	free(viewport);
 	return (NULL);
 }

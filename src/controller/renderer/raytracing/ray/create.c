@@ -5,29 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 23:36:51 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/12 15:49:05 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/12 13:38:25 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/12 20:04:24 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_img	*image_create(t_mlx *mlx, int width, int height)
+static void	ray_init(t_ray *ray, t_vector *coordinate)
 {
-	t_img	*image;
+	ray->origin = vector_create("0", "0", "0");
+	if (ray->origin == NULL)
+		return ;
+	ray->origin->x = coordinate->x;
+	ray->origin->y = coordinate->y;
+	ray->origin->z = coordinate->z;
+	ray->direction = vector_create("0", "0", "0");
+	if (ray->direction == NULL)
+		return ;
+}
 
-	image = malloc(sizeof(t_img));
-	if (image == NULL)
+t_ray	*ray_create(t_vector *coordinate)
+{
+	t_ray	*ray;
+
+	ray = malloc(sizeof(t_ray));
+	if (ray == NULL)
 		return (NULL);
-	image->instance = mlx_new_image(mlx->instance, width, height);
-	if (image->instance == NULL)
-	{
-		free(image);
-		return (NULL);
-	}
-	image->addr = mlx_get_data_addr(image->instance, &image->bits_per_pixel, &image->line_length, &image->endian);
-	image->width = width;
-	image->height = height;
-	image->ratio = (float)width / height;
-	return (image);
+	ray->origin = NULL;
+	ray->direction = NULL;
+	ray_init(ray, coordinate);
+	if (errno == ENOMEM)
+		return (ray_free(ray));
+	return (ray);
 }

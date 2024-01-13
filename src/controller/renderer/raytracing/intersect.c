@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 15:44:27 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/11 17:18:24 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/12 15:55:17 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/12 20:59:10 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	*color_free(t_color *color)
+float	ray_intersect(t_ray *ray, t_obj *object)
 {
-	free(color);
-	return (NULL);
+	if (object == NULL)
+		return (FLT_MAX);
+	if (!ft_strncmp(object->id, "sp", -1))
+		return (ray_sphere_intersection(ray, object->sphere));
+	else if (!ft_strncmp(object->id, "pl", -1))
+		return (ray_plane_intersection(ray, object->plane));
+	/*
+	else if (!ft_strncmp(object->id, "cy", -1))
+		return (ray_cylinder_intersection(ray, object->cylinder));
+*/
+	else
+		return (FLT_MAX);
 }

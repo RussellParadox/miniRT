@@ -5,29 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 23:36:51 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/12 15:49:05 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/12 13:11:25 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/12 15:50:52 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_img	*image_create(t_mlx *mlx, int width, int height)
+//horizontal_fov in radians
+t_viewport *viewport_create(t_img *canva, float horizontal_fov, float distance)
 {
-	t_img	*image;
+	t_viewport	*viewport;
 
-	image = malloc(sizeof(t_img));
-	if (image == NULL)
+	viewport = malloc(sizeof(t_viewport));
+	if (viewport == NULL)
 		return (NULL);
-	image->instance = mlx_new_image(mlx->instance, width, height);
-	if (image->instance == NULL)
-	{
-		free(image);
-		return (NULL);
-	}
-	image->addr = mlx_get_data_addr(image->instance, &image->bits_per_pixel, &image->line_length, &image->endian);
-	image->width = width;
-	image->height = height;
-	image->ratio = (float)width / height;
-	return (image);
+	viewport->width = fabsf(2 * distance * tanf(horizontal_fov / 2));
+	viewport->height = viewport->width / canva->ratio;
+	viewport->width_ratio = viewport->width / canva->width;
+	viewport->height_ratio = viewport->height / canva->height;
+	return (viewport);
 }
