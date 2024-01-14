@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   quadratic_minimum.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 07:55:00 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/14 17:16:12 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/14 19:01:50 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/14 19:05:55 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	main(int argc, char *argv[])
+float	intersection_quadratic_minimum(float a, float b, float c)
 {
-	t_list	*scene;
-	int		fd;
-	int		status;
+	float	parameter1;
+	float	parameter2;
+	float	delta;
 
-	errno = 0;
-	(void)argc;
- /*
-	if (argument_check(argc, argv))
-		return (EXIT_FAILURE);
-*/
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		return (EXIT_FAILURE);
-	scene = scene_create(fd);
-	close(fd);
-	if (errno == ENOMEM)
-		return (EXIT_FAILURE);
-	status = controller_loop(scene);
-	ft_lstclear(&scene, &object_free);
-	return (status);
+	delta = powf(b, 2) - 4 * a * c;
+	if (delta < 0)
+		return (FLT_MAX);
+	parameter1 = (-b - sqrtf(delta)) / (2 * a);
+	parameter2 = (-b + sqrtf(delta)) / (2 * a);
+	if (parameter1 < parameter2 && parameter1 > CAMERA_VIEWPORT_DISTANCE)
+		return (parameter1);
+	else
+		return (parameter2);
 }

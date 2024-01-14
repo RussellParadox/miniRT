@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/12 20:56:36 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/14 19:54:35 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_plane
 typedef struct s_cylinder
 {
 	t_vector	*coordinate;
-	t_vector	*axis_normal;
+	t_vector	*axis;
 	float		diameter;
 	float		height;
 	t_color		*color;
@@ -159,6 +159,8 @@ t_vector	*vector_create(char *x, char *y, char *z);
 void	*vector_free(t_vector *vector);
 //scalar product
 float	vector_scalar_product(t_vector *v1, t_vector *v2);
+//norm
+float	vector_norm(t_vector *v);
 
 /*->->->color*/
 //create
@@ -270,10 +272,14 @@ void	*viewport_free(t_viewport *viewport);
 
 /*->->->intersection*/
 # define PRECISION 0.001
+//quadratic minimum
+float	intersection_quadratic_minimum(float a, float b, float c);
 //sphere
 float	ray_sphere_intersection(t_ray *ray, t_sphere *sphere);
 //plane
 float	ray_plane_intersection(t_ray *ray, t_plane *plane);
+//cylinder
+float	ray_cylinder_intersection(t_ray *ray, t_cylinder *cylinder);
 
 # define CAMERA_VIEWPORT_DISTANCE 1
 //intersect

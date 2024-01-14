@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 15:47:07 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/03 23:45:18 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/14 16:44:58 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	cylinder_init(t_cylinder *cylinder, char **data)
 	split = ft_split(data[2], ',');
 	if (split == NULL)
 		return ;
-	cylinder->axis_normal = vector_create(split[0], split[1], split[2]);
+	cylinder->axis = vector_create(split[0], split[1], split[2]);
 	array_free(split, 2);
-	if (cylinder->axis_normal == NULL)
+	if (cylinder->axis == NULL)
 		return ;
 	split = ft_split(data[5], ',');
 	if (split == NULL)
@@ -47,7 +47,7 @@ t_cylinder	*cylinder_create(char **data)
 	if (cylinder == NULL)
 		return (NULL);
 	cylinder->coordinate = NULL;
-	cylinder->axis_normal = NULL;
+	cylinder->axis = NULL;
 	cylinder->diameter = ascii_to_float(data[3]);
 	cylinder->height = ascii_to_float(data[4]);
 	cylinder->color = NULL;
