@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   ambient_lightning.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/30 22:55:53 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/16 04:50:55 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/16 02:53:37 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/16 03:45:40 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	controller_routine(void *param[2])
+void	ambient_lightning_reflection(t_vector *intensity, t_ambient_lightning *ambient_lightning)
 {
-	t_mlx	*mlx;
-	t_list	*scene;
-	t_img	*canva;
-
-	mlx = param[0];
-	scene = param[1];
-	canva = image_create(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (canva == NULL)
-		return (-1);
-	raytracing_render(canva, scene);
-	view_routine(canva, mlx);
-	image_free(canva, mlx);
-	if (errno == ENOMEM)
-		return (loop_end_hook(param));
-	return (0);
+	intensity->x += ambient_lightning->ratio * ambient_lightning->color->red / ambient_lightning->color->sum;
+	intensity->y += ambient_lightning->ratio * ambient_lightning->color->green / ambient_lightning->color->sum;
+	intensity->z += ambient_lightning->ratio * ambient_lightning->color->blue / ambient_lightning->color->sum;
 }

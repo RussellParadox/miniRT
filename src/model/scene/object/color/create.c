@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 15:20:25 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/02 15:38:51 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/16 03:46:31 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ t_color	*color_create(char *red, char *green, char *blue)
 	color->red = ft_atoi(red);
 	color->green = ft_atoi(green);
 	color->blue = ft_atoi(blue);
+	color->sum = color->red + color->green + color->blue;
 	return (color);
 }

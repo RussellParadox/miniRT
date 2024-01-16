@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/30 22:55:53 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/16 04:50:55 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/16 04:17:43 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/16 04:30:10 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	controller_routine(void *param[2])
+void	object_normal_init(t_vector *normal, t_obj *object, t_vector *intersection)
 {
-	t_mlx	*mlx;
-	t_list	*scene;
-	t_img	*canva;
-
-	mlx = param[0];
-	scene = param[1];
-	canva = image_create(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (canva == NULL)
-		return (-1);
-	raytracing_render(canva, scene);
-	view_routine(canva, mlx);
-	image_free(canva, mlx);
-	if (errno == ENOMEM)
-		return (loop_end_hook(param));
-	return (0);
+	if (!ft_strncmp(object->id, "sp", -1))
+		sphere_normal(normal, object->sphere, intersection);
+	/*
+	else if (!ft_strncmp(object->id, "pl", -1))
+		plane_normal(normal, object->plane, intersection);
+	else if (!ft_strncmp(object->id, "cy", -1))
+		cylinder_normal(normal, object->cylinder, intersection);
+*/
 }

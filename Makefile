@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/01/14 20:40:30 by gdornic          ###   ########.fr        #
+#    Updated: 2024/01/16 04:29:23 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,12 @@ SRC = 	$(addprefix view/, routine.c) \
 				$(addprefix raytracing/, \
 					$(addprefix ray/, create.c free.c) \
 					$(addprefix viewport/, create.c free.c) \
-					$(addprefix intersection/, quadratic_minimum.c sphere.c plane.c cylinder.c) \
-					intersect.c method.c render.c) \
+					$(addprefix intersection/, intersect.c quadratic_minimum.c sphere.c plane.c cylinder.c) \
+					$(addprefix normal/, init.c sphere.c) \
+					$(addprefix light/, \
+						$(addprefix reflection/, light_intensity.c ambient_lightning.c light.c) \
+						effect.c) \
+					method.c render.c) \
 				draw_circle.c) \
 			$(addprefix mlx/, create.c free.c) \
 			$(addprefix hook/, routine.c loop_end.c) \

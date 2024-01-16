@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/14 19:54:35 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/16 04:28:34 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ typedef struct s_vector
 
 typedef struct s_color
 {
-	int	red;
-	int	green;
-	int	blue;
+	int		red;
+	int		green;
+	int		blue;
+	float	sum;
 }	t_color;
 
 typedef struct s_ambient_lightning
@@ -272,6 +273,8 @@ void	*viewport_free(t_viewport *viewport);
 
 /*->->->intersection*/
 # define PRECISION 0.001
+//intersect
+float	ray_intersect(t_ray *ray, t_obj *object);
 //quadratic minimum
 float	intersection_quadratic_minimum(float a, float b, float c);
 //sphere
@@ -281,9 +284,25 @@ float	ray_plane_intersection(t_ray *ray, t_plane *plane);
 //cylinder
 float	ray_cylinder_intersection(t_ray *ray, t_cylinder *cylinder);
 
+/*->->->light*/
+//effect
+void	light_effect(t_color *color, t_list *scene, t_obj *object, t_vector *intersection);
+
+/*->->->->reflection*/
+//light intensity
+void	light_intensity_reflection(t_vector *intensity, t_vector *normal, t_list *scene, t_vector *intersection);
+//ambient lightning
+void	ambient_lightning_reflection(t_vector *intensity, t_ambient_lightning *ambient_lightning);
+//light
+void	light_reflection(t_vector *intensity, t_vector *normal, t_light *light, t_vector *intersection);
+
+/*->->->normal*/
+//init
+void	object_normal_init(t_vector *normal, t_obj *object, t_vector *intersection);
+//sphere
+void	sphere_normal(t_vector *normal, t_sphere *sphere, t_vector *intersection);
+
 # define CAMERA_VIEWPORT_DISTANCE 1
-//intersect
-float	ray_intersect(t_ray *ray, t_obj *object);
 //method
 void	raytracing_method(t_img *canva, t_list *scene, t_viewport *viewport, t_ray *ray);
 //render

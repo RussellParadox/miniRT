@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:37:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/12 20:12:24 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/16 05:02:06 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 //ray = ray->origin + parameter * ray->direction
 static void	ray_trace(t_color *color, t_ray *ray, t_list *scene)
 {
-	float	parameter;
-	float	parameter_min;
-	t_obj	*object;
-	t_obj	*closest_object;
+	t_list		*scene_cpy;
+	float		parameter;
+	float		parameter_min;
+	t_obj		*object;
+	t_obj		*closest_object;
+	t_vector	intersection;
 
+	scene_cpy = scene;
 	closest_object = NULL;
 	parameter_min = FLT_MAX;
 	while (scene != NULL)
@@ -33,9 +36,10 @@ static void	ray_trace(t_color *color, t_ray *ray, t_list *scene)
 		}
 		scene = scene->next;
 	}
-	color->red = object_color(closest_object)->red;
-	color->green = object_color(closest_object)->green;
-	color->blue = object_color(closest_object)->blue;
+	intersection.x = ray->origin->x + parameter_min * ray->direction->x;
+	intersection.y = ray->origin->y + parameter_min * ray->direction->y;
+	intersection.z = ray->origin->z + parameter_min * ray->direction->z;
+	light_effect(color, scene_cpy, closest_object, &intersection);
 }
 
 static void	ray_direction_set(t_ray *ray, t_camera *camera, t_vector *pixel, t_viewport *viewport)
