@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/01/16 04:29:23 by gdornic          ###   ########.fr        #
+#    Updated: 2024/01/17 07:25:39 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC = 	$(addprefix view/, routine.c) \
 					$(addprefix ray/, create.c free.c) \
 					$(addprefix viewport/, create.c free.c) \
 					$(addprefix intersection/, intersect.c quadratic_minimum.c sphere.c plane.c cylinder.c) \
-					$(addprefix normal/, init.c sphere.c) \
+					$(addprefix normal/, init.c sphere.c plane.c cylinder.c) \
 					$(addprefix light/, \
 						$(addprefix reflection/, light_intensity.c ambient_lightning.c light.c) \
 						effect.c) \

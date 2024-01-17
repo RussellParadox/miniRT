@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/16 04:28:34 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/17 07:25:29 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,6 +301,10 @@ void	light_reflection(t_vector *intensity, t_vector *normal, t_light *light, t_v
 void	object_normal_init(t_vector *normal, t_obj *object, t_vector *intersection);
 //sphere
 void	sphere_normal(t_vector *normal, t_sphere *sphere, t_vector *intersection);
+//plane
+void	plane_normal(t_vector *normal, t_plane *plane);
+//cylinder
+void	cylinder_normal(t_vector *normal, t_cylinder *cylinder, t_vector *intersection);
 
 # define CAMERA_VIEWPORT_DISTANCE 1
 //method
