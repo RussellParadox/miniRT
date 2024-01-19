@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/01/17 07:25:39 by gdornic          ###   ########.fr        #
+#    Updated: 2024/01/19 03:48:03 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC = 	$(addprefix view/, routine.c) \
 					$(addprefix intersection/, intersect.c quadratic_minimum.c sphere.c plane.c cylinder.c) \
 					$(addprefix normal/, init.c sphere.c plane.c cylinder.c) \
 					$(addprefix light/, \
-						$(addprefix reflection/, light_intensity.c ambient_lightning.c light.c) \
+						$(addprefix model/, light_intensity.c ambient_lightning.c light_point.c) \
 						effect.c) \
 					method.c render.c) \
 				draw_circle.c) \
@@ -49,7 +49,7 @@ SRC = 	$(addprefix view/, routine.c) \
 					$(addprefix light/, create.c free.c) \
 					$(addprefix plane/, create.c free.c) \
 					$(addprefix sphere/, create.c free.c) \
-					find_method.c color_method.c next_object.c create.c free.c) \
+					specular_method.c find_method.c color_method.c next_object.c create.c free.c) \
 				create.c free.c) \
 			)
 

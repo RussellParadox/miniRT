@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/17 07:25:29 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/18 18:47:13 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_sphere
 	t_vector	*coordinate;
 	float		diameter;
 	t_color		*color;
+	float		specular;
 }	t_sphere;
 
 typedef struct s_plane
@@ -74,6 +75,7 @@ typedef struct s_plane
 	t_vector	*coordinate;
 	t_vector	*normal;
 	t_color		*color;
+	float		specular;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -83,6 +85,7 @@ typedef struct s_cylinder
 	float		diameter;
 	float		height;
 	t_color		*color;
+	float		specular;
 }	t_cylinder;
 
 typedef struct u_obj_type
@@ -155,6 +158,7 @@ void	*scene_free(t_list *scene);
 
 /*->->->vector*/
 //create
+void	vector_init(t_vector *vector, float x, float y, float z);
 t_vector	*vector_create(char *x, char *y, char *z);
 //free
 void	*vector_free(t_vector *vector);
@@ -205,6 +209,8 @@ t_cylinder	*cylinder_create(char **data);
 //free
 void	*cylinder_free(t_cylinder *cylinder);
 
+//specular method
+float	object_specular(t_obj *object);
 //color method
 t_color	*object_color(t_obj *object);
 //find method
@@ -288,13 +294,13 @@ float	ray_cylinder_intersection(t_ray *ray, t_cylinder *cylinder);
 //effect
 void	light_effect(t_color *color, t_list *scene, t_obj *object, t_vector *intersection);
 
-/*->->->->reflection*/
+/*->->->->model*/
 //light intensity
-void	light_intensity_reflection(t_vector *intensity, t_vector *normal, t_list *scene, t_vector *intersection);
+void	light_intensity_model(t_vector *intensity, t_obj *object, t_list *scene, t_vector *intersection);
 //ambient lightning
-void	ambient_lightning_reflection(t_vector *intensity, t_ambient_lightning *ambient_lightning);
+void	ambient_lightning_model(t_vector *intensity, t_ambient_lightning *ambient_lightning);
 //light
-void	light_reflection(t_vector *intensity, t_vector *normal, t_light *light, t_vector *intersection);
+void	light_point_model(t_vector *intensity, t_light *light, float specular, void *arg[3]);
 
 /*->->->normal*/
 //init

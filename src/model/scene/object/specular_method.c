@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create.c                                           :+:      :+:    :+:   */
+/*   specular_method.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 17:00:46 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/18 17:36:15 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/18 18:44:27 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/18 18:45:43 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	vector_init(t_vector *vector, float x, float y, float z)
+float	object_specular(t_obj *object)
 {
-	vector->x = x;
-	vector->y = y;
-	vector->z = z;
-}
-
-t_vector	*vector_create(char *x, char *y, char *z)
-{
-	t_vector	*vector;
-
-	vector = malloc(sizeof(t_vector));
-	if (vector == NULL)
-		return (NULL);
-	vector_init(vector, ascii_to_float(x), ascii_to_float(y), ascii_to_float(z));
-	return (vector);
+	if (!ft_strncmp(object->id, "sp", -1))
+		return (object->sphere->specular);
+	else if (!ft_strncmp(object->id, "pl", -1))
+		return (object->plane->specular);
+	else if (!ft_strncmp(object->id, "cy", -1))
+		return (object->cylinder->specular);
+	else
+		return (-1);
 }

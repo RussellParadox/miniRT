@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 15:47:07 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/14 16:44:58 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/18 18:43:49 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ t_cylinder	*cylinder_create(char **data)
 	cylinder->diameter = ascii_to_float(data[3]);
 	cylinder->height = ascii_to_float(data[4]);
 	cylinder->color = NULL;
+	cylinder->specular = -1;
+	if (data[6] != NULL)
+		cylinder->specular = ascii_to_float(data[6]);
 	cylinder_init(cylinder, data);
 	if (errno == ENOMEM)
 		return (cylinder_free(cylinder));

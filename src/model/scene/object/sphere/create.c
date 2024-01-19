@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:52:42 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/02 16:58:13 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/18 18:59:54 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ t_sphere	*sphere_create(char **data)
 	sphere->coordinate = NULL;
 	sphere->diameter = ascii_to_float(data[2]);
 	sphere->color = NULL;
+	sphere->specular = -1;
+	if (data[4] != NULL)
+		sphere->specular = ascii_to_float(data[4]);
 	sphere_init(sphere, data);
 	if (errno == ENOMEM)
 		return (sphere_free(sphere));
