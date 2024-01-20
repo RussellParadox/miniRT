@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   specular_method.c                                  :+:      :+:    :+:   */
+/*   str_cmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 18:44:27 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/19 22:21:14 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/19 22:07:49 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/19 22:44:11 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "toolbox.h"
 
-float	object_specular(t_obj *object)
+int	str_cmp(char *s1, char *s2)
 {
-	if (!str_cmp(object->id, "sp"))
-		return (object->sphere->specular);
-	else if (!str_cmp(object->id, "pl"))
-		return (object->plane->specular);
-	else if (!str_cmp(object->id, "cy"))
-		return (object->cylinder->specular);
-	else
-		return (-1);
+	while (*s1 == *s2 && *s1)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
 }

@@ -6,13 +6,13 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/01/03 15:11:38 by gdornic          ###   ########.fr        #
+#    Updated: 2024/01/19 22:10:37 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libtoolbox.a
 
-SRC = array_free.c ascii_to_float.c
+SRC = array_free.c ascii_to_float.c str_cmp.c
 
 OBJ = $(SRC:.c=.o)
 

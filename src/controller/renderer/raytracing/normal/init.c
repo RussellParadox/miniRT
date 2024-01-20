@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 04:17:43 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/17 07:25:57 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/19 22:21:14 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	object_normal_init(t_vector *normal, t_obj *object, t_vector *intersection)
 {
-	if (!ft_strncmp(object->id, "sp", -1))
+	if (!str_cmp(object->id, "sp"))
 		sphere_normal(normal, object->sphere, intersection);
-	else if (!ft_strncmp(object->id, "pl", -1))
+	else if (!str_cmp(object->id, "pl"))
 		plane_normal(normal, object->plane);
-	else if (!ft_strncmp(object->id, "cy", -1))
+	else if (!str_cmp(object->id, "cy"))
 		cylinder_normal(normal, object->cylinder, intersection);
 }

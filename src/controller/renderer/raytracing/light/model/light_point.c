@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 03:58:34 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/19 04:13:59 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/20 03:02:41 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static float	specular_weight(t_vector *l, t_vector *normal, t_camera *camera, fl
 	return (0);
 }
 
-void	light_point_model(t_vector *intensity, t_light *light, float specular, void *arg[3])
+void	light_point_model(t_vector *intensity, t_light *light, float specular, void *arg[4])
 {
 	t_vector	l;
 	float		weight;
@@ -53,11 +53,11 @@ void	light_point_model(t_vector *intensity, t_light *light, float specular, void
 	l.x = light->coordinate->x - intersection->x;
 	l.y = light->coordinate->y - intersection->y;
 	l.z = light->coordinate->z - intersection->z;
+	if (shadow_model(arg[3], intersection, &l))
+		return ;
 	weight = diffuse_weight(&l, normal);
 	if (!(specular < 0))
-	{
 		weight += specular_weight(&l, normal, (t_camera *)(arg[1]), specular);
-	}
 	weight *= light->ratio;
 	intensity->x += weight * light->color->red / light->color->sum;
 	intensity->y += weight * light->color->green / light->color->sum;

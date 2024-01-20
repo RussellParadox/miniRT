@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/18 18:47:13 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/20 03:03:05 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,8 @@ t_cylinder	*cylinder_create(char **data);
 //free
 void	*cylinder_free(t_cylinder *cylinder);
 
+//ratio method
+float	object_ratio(t_obj *object);
 //specular method
 float	object_specular(t_obj *object);
 //color method
@@ -295,12 +297,14 @@ float	ray_cylinder_intersection(t_ray *ray, t_cylinder *cylinder);
 void	light_effect(t_color *color, t_list *scene, t_obj *object, t_vector *intersection);
 
 /*->->->->model*/
+//shadow
+int	shadow_model(t_list *scene, t_vector *intersection, t_vector *l);
 //light intensity
 void	light_intensity_model(t_vector *intensity, t_obj *object, t_list *scene, t_vector *intersection);
 //ambient lightning
 void	ambient_lightning_model(t_vector *intensity, t_ambient_lightning *ambient_lightning);
 //light
-void	light_point_model(t_vector *intensity, t_light *light, float specular, void *arg[3]);
+void	light_point_model(t_vector *intensity, t_light *light, float specular, void *arg[4]);
 
 /*->->->normal*/
 //init

@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 08:54:09 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/04 09:50:42 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/19 22:21:14 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ void	object_free(void *content)
 	t_obj	*object;
 
 	object = (t_obj *)content;
-	if (!ft_strncmp(object->id, "A", -1))
+	if (!str_cmp(object->id, "A"))
 		ambient_lightning_free(object->ambient_lightning);
-	else if (!ft_strncmp(object->id, "C", -1))
+	else if (!str_cmp(object->id, "C"))
 		camera_free(object->camera);
-	else if (!ft_strncmp(object->id, "L", -1))
+	else if (!str_cmp(object->id, "L"))
 		light_free(object->light);
-	else if (!ft_strncmp(object->id, "sp", -1))
+	else if (!str_cmp(object->id, "sp"))
 		sphere_free(object->sphere);
-	else if (!ft_strncmp(object->id, "pl", -1))
+	else if (!str_cmp(object->id, "pl"))
 		plane_free(object->plane);
-	else if (!ft_strncmp(object->id, "cy", -1))
+	else if (!str_cmp(object->id, "cy"))
 		cylinder_free(object->cylinder);
 	free(object);
 }

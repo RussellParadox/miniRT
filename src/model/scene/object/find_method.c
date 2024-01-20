@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 14:58:14 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/12 20:21:07 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/19 22:21:14 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static t_obj_type	*object_content(t_obj *object)
 {
-	if (!ft_strncmp(object->id, "A", -1))
+	if (!str_cmp(object->id, "A"))
 		return ((t_obj_type *)object->ambient_lightning);
-	else if (!ft_strncmp(object->id, "C", -1))
+	else if (!str_cmp(object->id, "C"))
 		return ((t_obj_type *)object->camera);
-	else if (!ft_strncmp(object->id, "L", -1))
+	else if (!str_cmp(object->id, "L"))
 		return ((t_obj_type *)object->light);
-	else if (!ft_strncmp(object->id, "sp", -1))
+	else if (!str_cmp(object->id, "sp"))
 		return ((t_obj_type *)object->sphere);
-	else if (!ft_strncmp(object->id, "pl", -1))
+	else if (!str_cmp(object->id, "pl"))
 		return ((t_obj_type *)object->plane);
-	else if (!ft_strncmp(object->id, "cy", -1))
+	else if (!str_cmp(object->id, "cy"))
 		return ((t_obj_type *)object->cylinder);
 	return (NULL);
 }
@@ -36,7 +36,7 @@ t_obj_type	*object_find(char *id, t_list *scene)
 	while (scene != NULL)
 	{
 		object = scene->content;
-		if (!ft_strncmp(object->id, id, -1))
+		if (!str_cmp(object->id, id))
 			return (object_content(object));
 		scene = scene->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:37:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/18 17:24:56 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/20 01:21:44 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,27 @@ void	raytracing_method(t_img *canva, t_list *scene, t_viewport *viewport, t_ray 
 {
 	t_camera	*camera;
 	t_color		*color;
-	t_vector	*pixel;
+	int			x;
+	int			y;
 
 	camera = (t_camera *)object_find("C", scene);
 	color = color_create("0", "0", "0");
-	pixel = vector_create("0", "0", "0");
-	pixel->x = -canva->width / 2;
-	if (camera != NULL && color != NULL && pixel != NULL)
+	if (camera != NULL && color != NULL)
 	{
-		while (pixel->x <= canva->width / 2)
+		x = -canva->width / 2;
+		while (x <= canva->width / 2)
 		{
-			pixel->y = -canva->height / 2;
-			while (pixel->y <= canva->height / 2)
+			y = -canva->height / 2;
+			while (y <= canva->height / 2)
 			{
-				ray_direction_set(ray, camera, pixel, viewport);
+				ray_direction_set(ray, camera, &((t_vector) {x, y, 0}), viewport);
 				ray_trace(color, ray, scene);
-				canva_pixel_put(canva, pixel->x, pixel->y, trgb_create(0, color->red, color->green, color->blue));
-				pixel->y++;
+				canva_pixel_put(canva, x, y, trgb_create(0, color->red, color->green, color->blue));
+				y++;
 			}
-			pixel->x++;
+			x++;
 		}
 	}
-	if ((color == NULL || !color_free(color)) && (pixel == NULL || !vector_free(pixel)))
-		return ;
+	if (color != NULL)
+		color_free(color);
 }
