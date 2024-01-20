@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 22:55:53 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/20 04:17:05 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/20 08:21:46 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ int	controller_routine(void *param[2])
 	canva = image_create(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (canva == NULL)
 		return (-1);
-	animation_sphere_parabole(scene, -0.2, 6, 40);
-	animation_light_horizontale(scene, -0.3);
+	//animation_sphere_parabole(scene, -0.2, 6, 40);
+	//animation_light_horizontale(scene, -0.3);
 	//animation_circular_rotation(((t_sphere *)object_find("sp", scene))->coordinate, &((t_vector) {0, 20, 25}), 20, M_PI / 60);
-	animation_circular_rotation(((t_light *)object_find("L", scene))->coordinate, &((t_vector) {0, 50, 25}), 30, -M_PI / 100);
+	//animation_circular_rotation(((t_light *)object_find("L", scene))->coordinate, &((t_vector) {0, 50, 25}), 30, -M_PI / 100);
 	raytracing_render(canva, scene);
 	view_routine(canva, mlx);
 	image_free(canva, mlx);

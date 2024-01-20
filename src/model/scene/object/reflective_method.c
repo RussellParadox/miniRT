@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect.c                                        :+:      :+:    :+:   */
+/*   reflective_method.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:55:17 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/20 06:20:59 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/20 05:23:59 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/20 05:25:17 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-float	ray_intersect(t_ray *ray, t_obj *object)
+float	object_reflective(t_obj *object)
 {
-	if (object == NULL)
-		return (FLT_MAX);
 	if (!str_cmp(object->id, "sp"))
-		return (ray_sphere_intersection(ray, object->sphere));
+		return (object->sphere->reflective);
 	else if (!str_cmp(object->id, "pl"))
-		return (ray_plane_intersection(ray, object->plane));
+		return (object->plane->reflective);
 	else if (!str_cmp(object->id, "cy"))
-		return (ray_cylinder_intersection(ray, object->cylinder));
+		return (object->cylinder->reflective);
 	else
-		return (FLT_MAX);
+		return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:37:15 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/18 18:43:32 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/20 05:18:30 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,11 @@ t_plane	*plane_create(char **data)
 	plane->normal = NULL;
 	plane->color = NULL;
 	plane->specular = -1;
+	plane->reflective = -1;
 	if (data[4] != NULL)
 		plane->specular = ascii_to_float(data[4]);
+	if (data[4] != NULL && data[5] != NULL)
+		plane->reflective = ascii_to_float(data[5]);
 	plane_init(plane, data);
 	if (errno == ENOMEM)
 		return (plane_free(plane));

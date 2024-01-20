@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/20 03:03:05 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/20 06:41:42 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_sphere
 	float		diameter;
 	t_color		*color;
 	float		specular;
+	float		reflective;
 }	t_sphere;
 
 typedef struct s_plane
@@ -76,6 +77,7 @@ typedef struct s_plane
 	t_vector	*normal;
 	t_color		*color;
 	float		specular;
+	float		reflective;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -86,6 +88,7 @@ typedef struct s_cylinder
 	float		height;
 	t_color		*color;
 	float		specular;
+	float		reflective;
 }	t_cylinder;
 
 typedef struct u_obj_type
@@ -136,6 +139,7 @@ typedef struct s_ray
 {
 	t_vector	*origin;
 	t_vector	*direction;
+	float		parameter_min;
 }	t_ray;
 
 typedef struct s_viewport
@@ -145,6 +149,12 @@ typedef struct s_viewport
 	float	width_ratio;
 	float	height_ratio;
 }	t_viewport;
+
+typedef struct s_closest
+{
+	t_obj	*object;
+	float	parameter;
+}	t_closest;
 
 /*model*/
 
@@ -209,6 +219,8 @@ t_cylinder	*cylinder_create(char **data);
 //free
 void	*cylinder_free(t_cylinder *cylinder);
 
+//reflective method
+float	object_reflective(t_obj *object);
 //ratio method
 float	object_ratio(t_obj *object);
 //specular method
@@ -294,16 +306,17 @@ float	ray_cylinder_intersection(t_ray *ray, t_cylinder *cylinder);
 
 /*->->->light*/
 //effect
-void	light_effect(t_color *color, t_list *scene, t_obj *object, t_vector *intersection);
+t_color	light_effect(t_vector normal, t_list *scene, t_obj *object, t_vector *intersection);
 
 /*->->->->model*/
 //shadow
 int	shadow_model(t_list *scene, t_vector *intersection, t_vector *l);
 //light intensity
-void	light_intensity_model(t_vector *intensity, t_obj *object, t_list *scene, t_vector *intersection);
+t_vector	light_intensity_model(t_vector normal, t_obj *object, t_list *scene, t_vector *intersection);
 //ambient lightning
 void	ambient_lightning_model(t_vector *intensity, t_ambient_lightning *ambient_lightning);
-//light
+//light point
+void	reflection_init(t_vector *reflection, t_vector *normal, t_vector *direction);
 void	light_point_model(t_vector *intensity, t_light *light, float specular, void *arg[4]);
 
 /*->->->normal*/

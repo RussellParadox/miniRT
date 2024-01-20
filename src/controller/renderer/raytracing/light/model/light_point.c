@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 03:58:34 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/20 03:02:41 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/20 05:34:45 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ static float	diffuse_weight(t_vector *l, t_vector *normal)
 	return (weight / vector_norm(l));
 }
 
+void	reflection_init(t_vector *reflection, t_vector *normal, t_vector *direction)
+{
+	float	product;
+
+	product = vector_scalar_product(direction, normal);
+	reflection->x = 2 * product * normal->x - direction->x;
+	reflection->y = 2 * product * normal->y - direction->y;
+	reflection->z = 2 * product * normal->z - direction->z;
+}
+
 static float	specular_weight(t_vector *l, t_vector *normal, t_camera *camera, float specular)
 {
 	float		weight;
@@ -31,10 +41,7 @@ static float	specular_weight(t_vector *l, t_vector *normal, t_camera *camera, fl
 	ic.x = -camera->orientation->x;
 	ic.y = -camera->orientation->y;
 	ic.z = -camera->orientation->z;
-	weight = vector_scalar_product(l, normal);
-	reflection.x = 2 * weight * normal->x - l->x;
-	reflection.y = 2 * weight * normal->y - l->y;
-	reflection.z = 2 * weight * normal->z - l->z;
+	reflection_init(&reflection, normal, l);
 	weight = vector_scalar_product(&ic, &reflection);
 	if (weight > 0)
 		return (powf(weight / (vector_norm(&reflection) * vector_norm(&ic)), specular));

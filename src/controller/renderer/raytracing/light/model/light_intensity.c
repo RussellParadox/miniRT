@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 03:37:14 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/20 03:03:27 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/20 06:42:33 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,28 @@ static void	arg_init(void *arg[4], t_vector *intersection, t_list *scene, t_vect
 	arg[3] = scene;
 }
 
-void	light_intensity_model(t_vector *intensity, t_obj *object, t_list *scene, t_vector *intersection)
+t_vector	light_intensity_model(t_vector normal, t_obj *object, t_list *scene, t_vector *intersection)
 {
 	t_obj		*i;
 	t_vector	intensity_sum;
-	t_vector	normal;
+	t_vector	intensity;
 	void		*arg[4];
 
+	intensity = (t_vector){0, 0, 0};
 	vector_init(&intensity_sum, 0, 0, 0);
-	object_normal_init(&normal, object, intersection);
 	arg_init(arg, intersection, scene, &normal);
 	while (scene != NULL)
 	{
 		i = scene->content;
 		if (!str_cmp(i->id, "A"))
-			ambient_lightning_model(intensity, i->ambient_lightning);
+			ambient_lightning_model(&intensity, i->ambient_lightning);
 		else if (!str_cmp(i->id, "L"))
-			light_point_model(intensity, i->light, object_specular(object), arg);
+			light_point_model(&intensity, i->light, object_specular(object), arg);
 		intensity_sum_add(&intensity_sum, object_ratio(i), object_color(i));
 		scene = scene->next;
 	}
-	intensity->x /= intensity_sum.x;
-	intensity->y /= intensity_sum.y;
-	intensity->z /= intensity_sum.z;
+	intensity.x /= intensity_sum.x;
+	intensity.y /= intensity_sum.y;
+	intensity.z /= intensity_sum.z;
+	return (intensity);
 }
