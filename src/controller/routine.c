@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 22:55:53 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/20 08:21:46 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/24 16:34:07 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,12 @@ void	animation_light_horizontale(t_list *scene, float x)
 	light->coordinate->x += x;
 }
 
-void	animation_sphere_parabole(t_list *scene, float a, float b, float c)
+void	animation_parabole(t_vector *r, float a, float b, float c)
 {
-	t_sphere	*sphere;
-
-	sphere = (t_sphere *)object_find("sp", scene);
-	if (sphere == NULL)
-		return ;
-	sphere->coordinate->y = a * powf(sphere->coordinate->x, 2) + b * sphere->coordinate->x + c;
-	sphere->coordinate->x += 1.8;
-	if (sphere->coordinate->y < 0)
-		sphere->coordinate->x = 0;
+	r->y = a * powf(r->x, 2) + b * r->x + c;
+	r->x += 0.1;
+	if (r->y < 0)
+		r->x = 0;
 }
 
 //r: center of object
@@ -52,17 +47,17 @@ int	controller_routine(void *param[2])
 	t_mlx	*mlx;
 	t_list	*scene;
 	t_img	*canva;
+	clock_t	start;
 
 	mlx = param[0];
 	scene = param[1];
 	canva = image_create(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (canva == NULL)
 		return (-1);
-	//animation_sphere_parabole(scene, -0.2, 6, 40);
-	//animation_light_horizontale(scene, -0.3);
-	//animation_circular_rotation(((t_sphere *)object_find("sp", scene))->coordinate, &((t_vector) {0, 20, 25}), 20, M_PI / 60);
-	//animation_circular_rotation(((t_light *)object_find("L", scene))->coordinate, &((t_vector) {0, 50, 25}), 30, -M_PI / 100);
+	start = clock();
 	raytracing_render(canva, scene);
+	printf("time: %f s\n", (float)(clock() - start) / CLOCKS_PER_SEC);
+	fflush(stdout);
 	view_routine(canva, mlx);
 	image_free(canva, mlx);
 	if (errno == ENOMEM)

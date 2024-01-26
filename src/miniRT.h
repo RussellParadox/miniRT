@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/20 06:41:42 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/26 13:47:41 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include <math.h>
 # include <toolbox.h>
 # include <float.h>
+# include <omp.h>
+# include <time.h>
 
 typedef struct s_vector
 {
@@ -53,6 +55,7 @@ typedef struct s_camera
 	t_vector	*coordinate;
 	t_vector	*orientation;
 	float		fov;
+	t_vector	base[3];
 }	t_camera;
 
 typedef struct s_light
@@ -137,8 +140,8 @@ typedef struct s_img
 
 typedef struct s_ray
 {
-	t_vector	*origin;
-	t_vector	*direction;
+	t_vector	origin;
+	t_vector	direction;
 	float		parameter_min;
 }	t_ray;
 
@@ -173,9 +176,20 @@ t_vector	*vector_create(char *x, char *y, char *z);
 //free
 void	*vector_free(t_vector *vector);
 //scalar product
-float	vector_scalar_product(t_vector *v1, t_vector *v2);
+float	vector_scalar_product(t_vector v1, t_vector v2);
 //norm
-float	vector_norm(t_vector *v);
+float	vector_norm(t_vector v);
+//sum
+t_vector	vector_sum(t_vector v1, t_vector v2);
+//sub
+t_vector	vector_sub(t_vector v1, t_vector v2);
+//rotation
+float	vector_sin(t_vector v1, t_vector v2);
+float	vector_cos(t_vector v1, t_vector v2);
+t_vector	vector_rotation_cs(t_vector v, t_vector axis, float c, float s);
+void	base_rotate(t_vector base[3], t_vector direction);
+//cross product
+t_vector	vector_cross_product(t_vector v1, t_vector v2);
 
 /*->->->color*/
 //create
@@ -279,59 +293,49 @@ void	draw_circle(t_img *canva, int origin_x, int origin_y, int radius);
 
 /*->->raytracing*/
 
-/*->->->ray*/
-//create
-t_ray	*ray_create(t_vector *coordinate);
-//free
-void	*ray_free(t_ray	*ray);
-
-/*->->->viewport*/
-//create
-t_viewport *viewport_create(t_img *canva, float horizontal_fov, float distance);
-//free
-void	*viewport_free(t_viewport *viewport);
-
 /*->->->intersection*/
 # define PRECISION 0.001
+//closest
+t_closest	closest_intersection(t_ray ray, t_list *scene);
 //intersect
-float	ray_intersect(t_ray *ray, t_obj *object);
+float	ray_intersect(t_ray ray, t_obj *object);
 //quadratic minimum
-float	intersection_quadratic_minimum(float a, float b, float c);
+float	intersection_quadratic_minimum(float a, float b, float c, float min);
 //sphere
-float	ray_sphere_intersection(t_ray *ray, t_sphere *sphere);
+float	ray_sphere_intersection(t_ray ray, t_sphere *sphere);
 //plane
-float	ray_plane_intersection(t_ray *ray, t_plane *plane);
+float	ray_plane_intersection(t_ray ray, t_plane *plane);
 //cylinder
-float	ray_cylinder_intersection(t_ray *ray, t_cylinder *cylinder);
+float	ray_cylinder_intersection(t_ray ray, t_cylinder *cylinder);
 
 /*->->->light*/
 //effect
-t_color	light_effect(t_vector normal, t_list *scene, t_obj *object, t_vector *intersection);
+t_color	light_effect(t_vector normal, t_list *scene, t_closest closest, t_ray ray);
+//reflection
+t_vector	reflection(t_vector normal, t_vector d);
 
 /*->->->->model*/
-//shadow
-int	shadow_model(t_list *scene, t_vector *intersection, t_vector *l);
 //light intensity
-t_vector	light_intensity_model(t_vector normal, t_obj *object, t_list *scene, t_vector *intersection);
+t_vector	light_intensity(t_vector normal, t_list *scene, t_vector p, t_vector v, float s);
 //ambient lightning
-void	ambient_lightning_model(t_vector *intensity, t_ambient_lightning *ambient_lightning);
+t_vector	ambient_lightning_intensity(t_ambient_lightning *ambient_lightning);
 //light point
-void	reflection_init(t_vector *reflection, t_vector *normal, t_vector *direction);
-void	light_point_model(t_vector *intensity, t_light *light, float specular, void *arg[4]);
+t_vector	light_point_intensity(t_light *light, t_vector normal, t_vector v, t_vector l, float s);
 
 /*->->->normal*/
 //init
-void	object_normal_init(t_vector *normal, t_obj *object, t_vector *intersection);
+t_vector	object_normal(t_obj *object, t_vector intersection);
 //sphere
-void	sphere_normal(t_vector *normal, t_sphere *sphere, t_vector *intersection);
+t_vector	sphere_normal(t_sphere *sphere, t_vector intersection);
 //plane
-void	plane_normal(t_vector *normal, t_plane *plane);
+t_vector	plane_normal(t_plane *plane);
 //cylinder
-void	cylinder_normal(t_vector *normal, t_cylinder *cylinder, t_vector *intersection);
+t_vector	cylinder_normal(t_cylinder *cylinder, t_vector intersection);
 
 # define CAMERA_VIEWPORT_DISTANCE 1
 //method
-void	raytracing_method(t_img *canva, t_list *scene, t_viewport *viewport, t_ray *ray);
+t_vector	ray_point(t_ray ray, float parameter);
+void	raytracing_method(t_img *canva, t_list *scene, t_viewport viewport);
 //render
 void	raytracing_render(t_img *canva, t_list *scene);
 

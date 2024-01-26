@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:37:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/20 08:14:02 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/26 14:33:36 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,34 +29,17 @@ static t_color	reflective_color(t_color local, t_color reflective, float r)
 	return (lr);
 }
 
-static t_closest	closest_intersection(t_ray *ray, t_list *scene)
+t_vector	ray_point(t_ray ray, float parameter)
 {
-	float		parameter;
-	float		closest_parameter;
-	t_obj		*object;
-	t_obj		*closest_object;
-
-	closest_object = NULL;
-	closest_parameter = FLT_MAX;
-	while (scene != NULL)
-	{
-		object = scene->content;
-		parameter = ray_intersect(ray, object);
-		if (parameter < closest_parameter && !(parameter < ray->parameter_min))
-		{
-			closest_parameter = parameter;
-			closest_object = object;
-		}
-		scene = scene->next;
-	}
-	return ((t_closest){closest_object, closest_parameter});
+	return ((t_vector){ray.origin.x + parameter * ray.direction.x, \
+	ray.origin.y + parameter * ray.direction.y, \
+	ray.origin.z + parameter * ray.direction.z});
 }
 
-//ray = ray->origin + parameter * ray->direction
-static t_color	ray_trace(t_ray *ray, t_list *scene, int depth)
+//ray = ray.origin + parameter * ray.direction
+static t_color	ray_trace(t_ray ray, t_list *scene, int depth)
 {
 	t_closest	closest;
-	t_vector	intersection;
 	t_vector	normal;
 	t_color		local_color;
 	t_color		reflect_color;
@@ -65,56 +48,49 @@ static t_color	ray_trace(t_ray *ray, t_list *scene, int depth)
 	closest = closest_intersection(ray, scene);
 	if (closest.object == NULL)
 		return ((t_color){0, 0, 0, 0});
-	intersection.x = ray->origin->x + closest.parameter * ray->direction->x;
-	intersection.y = ray->origin->y + closest.parameter * ray->direction->y;
-	intersection.z = ray->origin->z + closest.parameter * ray->direction->z;
-	object_normal_init(&normal, closest.object, &intersection);
-	local_color = light_effect(normal, scene, closest.object, &intersection);
+	normal = object_normal(closest.object, ray_point(ray, closest.parameter));
+	local_color = light_effect(normal, scene, closest, ray);
 	r = object_reflective(closest.object);
 	if (depth <= 0 || !(r > 0))
 		return (local_color);
-	vector_init(ray->origin, intersection.x, intersection.y, intersection.z);
-	vector_init(ray->direction, -ray->direction->x, -ray->direction->y, -ray->direction->z);
-	reflection_init(ray->direction, &normal, ray->direction);
-	ray->parameter_min = PRECISION;
+	ray.origin = ray_point(ray, closest.parameter);
+	ray.direction = vector_sub((t_vector){0, 0, 0}, ray.direction);
+	ray.direction = reflection(normal, ray.direction);
+	ray.parameter_min = PRECISION;
 	reflect_color = ray_trace(ray, scene, depth - 1);
 	return (reflective_color(local_color, reflect_color, r));
 }
 
-static void	ray_set(t_ray *ray, t_camera *camera, t_vector *pixel, t_viewport *viewport)
+t_vector	ray_direction(t_vector base[3], float x, float y, float z)
 {
-	ray->origin->x = camera->coordinate->x;
-	ray->origin->y = camera->coordinate->y;
-	ray->origin->z = camera->coordinate->z;
-	ray->direction->x = camera->orientation->x + pixel->x * viewport->width_ratio;
-	ray->direction->y = camera->orientation->y + pixel->y * viewport->height_ratio;
-	ray->direction->z = camera->orientation->z;
-	ray->parameter_min = CAMERA_VIEWPORT_DISTANCE;
+	return ((t_vector){base[0].x * x + base[1].x * y + base[2].x * z, \
+	base[0].y * x + base[1].y * y + base[2].y * z, \
+	base[0].z * x + base[1].z * y + base[2].z * z});
 }
 
-void	raytracing_method(t_img *canva, t_list *scene, t_viewport *viewport, t_ray *ray)
+void	raytracing_method(t_img *canva, t_list *scene, t_viewport viewport)
 {
 	t_camera	*camera;
 	t_color		color;
+	t_ray		ray;
 	int			x;
 	int			y;
 
 	camera = (t_camera *)object_find("C", scene);
 	color = (t_color){0, 0, 0, 0};
-	if (camera != NULL)
+	ray.origin = *camera->coordinate;
+	ray.parameter_min = CAMERA_VIEWPORT_DISTANCE;
+	x = -canva->width / 2;
+	while (x <= canva->width / 2)
 	{
-		x = -canva->width / 2;
-		while (x <= canva->width / 2)
+		y = -canva->height / 2;
+		while (y <= canva->height / 2)
 		{
-			y = -canva->height / 2;
-			while (y <= canva->height / 2)
-			{
-				ray_set(ray, camera, &((t_vector) {x, y, 0}), viewport);
-				color = ray_trace(ray, scene, 3);
-				canva_pixel_put(canva, x, y, trgb_create(0, color.red, color.green, color.blue));
-				y++;
-			}
-			x++;
+			ray.direction = ray_direction(camera->base, x * viewport.width_ratio, y * viewport.height_ratio, CAMERA_VIEWPORT_DISTANCE);
+			color = ray_trace(ray, scene, 2);
+			canva_pixel_put(canva, x, y, trgb_create(0, color.red, color.green, color.blue));
+			y++;
 		}
+		x++;
 	}
 }

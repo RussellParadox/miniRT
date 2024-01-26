@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect.c                                        :+:      :+:    :+:   */
+/*   sub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:55:17 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/25 09:44:28 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/25 13:40:58 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/25 13:41:22 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-float	ray_intersect(t_ray ray, t_obj *object)
+t_vector	vector_sub(t_vector v1, t_vector v2)
 {
-	if (object == NULL)
-		return (FLT_MAX);
-	if (!str_cmp(object->id, "sp"))
-		return (ray_sphere_intersection(ray, object->sphere));
-	else if (!str_cmp(object->id, "pl"))
-		return (ray_plane_intersection(ray, object->plane));
-	else if (!str_cmp(object->id, "cy"))
-		return (ray_cylinder_intersection(ray, object->cylinder));
-	else
-		return (FLT_MAX);
+	return ((t_vector){v1.x - v2.x, v1.y - v2.y, v1.z - v2.z});
 }

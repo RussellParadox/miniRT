@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect.c                                        :+:      :+:    :+:   */
+/*   cross_product.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:55:17 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/25 09:44:28 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/26 12:48:30 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/26 15:01:06 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-float	ray_intersect(t_ray ray, t_obj *object)
+t_vector	vector_cross_product(t_vector v1, t_vector v2)
 {
-	if (object == NULL)
-		return (FLT_MAX);
-	if (!str_cmp(object->id, "sp"))
-		return (ray_sphere_intersection(ray, object->sphere));
-	else if (!str_cmp(object->id, "pl"))
-		return (ray_plane_intersection(ray, object->plane));
-	else if (!str_cmp(object->id, "cy"))
-		return (ray_cylinder_intersection(ray, object->cylinder));
-	else
-		return (FLT_MAX);
+	return ((t_vector){v1.x * v2.z - v2.x * v1.z, \
+	v1.z * v2.y - v2.z * v1.y, \
+	v1.y * v2.x - v2.y * v1.x});
 }

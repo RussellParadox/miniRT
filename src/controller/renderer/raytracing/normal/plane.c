@@ -6,21 +6,23 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 05:31:02 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/17 05:35:51 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/25 10:19:01 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	plane_normal(t_vector *normal, t_plane *plane)
+t_vector	plane_normal(t_plane *plane)
 {
-	float	norm;
+	t_vector	normal;
+	float		norm;
 
-	normal->x = plane->normal->x;
-	normal->y = plane->normal->y;
-	normal->z = plane->normal->z;
+	normal.x = plane->normal->x;
+	normal.y = plane->normal->y;
+	normal.z = plane->normal->z;
 	norm = vector_norm(normal);
-	normal->x /= norm;
-	normal->y /= norm;
-	normal->z /= norm;
+	normal.x /= norm;
+	normal.y /= norm;
+	normal.z /= norm;
+	return (normal);
 }

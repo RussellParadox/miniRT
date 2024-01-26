@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   sum.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 13:41:18 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/12 20:04:49 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/25 13:38:13 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/25 13:39:29 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	*ray_free(t_ray	*ray)
+t_vector	vector_sum(t_vector v1, t_vector v2)
 {
-	if (ray->origin != NULL)
-		vector_free(ray->origin);
-	if (ray->direction != NULL)
-		vector_free(ray->direction);
-	free(ray);
-	return (NULL);
+	return ((t_vector){v1.x + v2.x, v1.y + v2.y, v1.z + v2.z});
 }

@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:33:07 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/02 16:32:15 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/26 15:11:12 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,9 @@ t_camera	*camera_create(char **data)
 	camera_init(camera, data);
 	if (errno == ENOMEM)
 		return (camera_free(camera));
+	camera->base[0] = (t_vector){1, 0, 0};
+	camera->base[1] = (t_vector){0, 1, 0};
+	camera->base[2] = (t_vector){0, 0, 1};
+	base_rotate(camera->base, *camera->orientation);
 	return (camera);
 }

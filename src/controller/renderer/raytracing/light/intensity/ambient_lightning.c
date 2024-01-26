@@ -6,15 +6,15 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 02:53:37 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/18 16:20:36 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/25 11:17:11 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	ambient_lightning_model(t_vector *intensity, t_ambient_lightning *ambient_lightning)
+t_vector	ambient_lightning_intensity(t_ambient_lightning *ambient_lightning)
 {
-	intensity->x += ambient_lightning->ratio * ambient_lightning->color->red / ambient_lightning->color->sum;
-	intensity->y += ambient_lightning->ratio * ambient_lightning->color->green / ambient_lightning->color->sum;
-	intensity->z += ambient_lightning->ratio * ambient_lightning->color->blue / ambient_lightning->color->sum;
+	return ((t_vector){ambient_lightning->ratio * ambient_lightning->color->red / ambient_lightning->color->sum, \
+	ambient_lightning->ratio * ambient_lightning->color->green / ambient_lightning->color->sum, \
+	ambient_lightning->ratio * ambient_lightning->color->blue / ambient_lightning->color->sum});
 }

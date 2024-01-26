@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/01/20 07:07:05 by gdornic          ###   ########.fr        #
+#    Updated: 2024/01/26 13:37:36 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,21 +14,19 @@ NAME = miniRT
 
 DEP = $(addprefix dep/, lib42 mlx_linux toolbox)
 
-HEADERS = $(addprefix -I, $(DEP)) -I/usr/include -Isrc
+HEADERS = $(addprefix -I, $(DEP)) -I/usr/include -Isrc -fopenmp
 
-LIB_LINK = $(addprefix -L, $(DEP)) -lmlx_Linux -l42 -ltoolbox -L/usr/lib -lXext -lX11 -lm -lz
+LIB_LINK = $(addprefix -L, $(DEP)) -lmlx_Linux -l42 -ltoolbox -L/usr/lib -lXext -lX11 -lm -lz -fopenmp
 
 SRC = 	$(addprefix view/, routine.c) \
 		$(addprefix controller/, \
 			$(addprefix renderer/, \
 				$(addprefix raytracing/, \
-					$(addprefix ray/, create.c free.c) \
-					$(addprefix viewport/, create.c free.c) \
-					$(addprefix intersection/, intersect.c quadratic_minimum.c sphere.c plane.c cylinder.c) \
+					$(addprefix intersection/, closest.c intersect.c quadratic_minimum.c sphere.c plane.c cylinder.c) \
 					$(addprefix normal/, init.c sphere.c plane.c cylinder.c) \
 					$(addprefix light/, \
-						$(addprefix model/, shadow.c light_intensity.c ambient_lightning.c light_point.c) \
-						effect.c) \
+						$(addprefix intensity/, light_intensity.c ambient_lightning.c light_point.c) \
+						effect.c reflection.c) \
 					method.c render.c) \
 				draw_circle.c) \
 			$(addprefix mlx/, create.c free.c) \
@@ -42,7 +40,7 @@ SRC = 	$(addprefix view/, routine.c) \
 			$(addprefix scene/, \
 				$(addprefix object/, \
 					$(addprefix color/, create.c free.c) \
-					$(addprefix vector/, create.c free.c scalar_product.c norm.c) \
+					$(addprefix vector/, cross_product.c rotation.c sum.c sub.c create.c free.c scalar_product.c norm.c) \
 					$(addprefix ambient_lightning/, create.c free.c) \
 					$(addprefix camera/, create.c free.c) \
 					$(addprefix cylinder/, create.c free.c) \
