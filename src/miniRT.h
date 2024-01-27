@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/26 13:47:41 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/27 15:00:52 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,8 @@ t_vector	vector_rotation_cs(t_vector v, t_vector axis, float c, float s);
 void	base_rotate(t_vector base[3], t_vector direction);
 //cross product
 t_vector	vector_cross_product(t_vector v1, t_vector v2);
+//normalize
+t_vector	vector_normalized(t_vector v);
 
 /*->->->color*/
 //create

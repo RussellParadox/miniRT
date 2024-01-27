@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 22:55:53 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/24 16:34:07 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/27 12:41:13 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,13 @@ int	controller_routine(void *param[2])
 	t_mlx	*mlx;
 	t_list	*scene;
 	t_img	*canva;
-	clock_t	start;
 
 	mlx = param[0];
 	scene = param[1];
 	canva = image_create(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (canva == NULL)
 		return (-1);
-	start = clock();
 	raytracing_render(canva, scene);
-	printf("time: %f s\n", (float)(clock() - start) / CLOCKS_PER_SEC);
-	fflush(stdout);
 	view_routine(canva, mlx);
 	image_free(canva, mlx);
 	if (errno == ENOMEM)

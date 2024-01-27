@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere.c                                           :+:      :+:    :+:   */
+/*   normalize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 04:23:49 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/27 15:06:38 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/27 14:59:10 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/27 15:00:40 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_vector	sphere_normal(t_sphere *sphere, t_vector intersection)
+t_vector	vector_normalized(t_vector v)
 {
-	t_vector	normal;
+	float	norm;
 
-	normal = vector_sub(intersection, *sphere->coordinate);
-	normal = vector_normalized(normal);
-	return (normal);
+	norm = vector_norm(v);
+	v.x /= norm;
+	v.y /= norm;
+	v.z /= norm;
+	return (v);
 }

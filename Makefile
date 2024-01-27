@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/01/26 13:37:36 by gdornic          ###   ########.fr        #
+#    Updated: 2024/01/27 15:01:11 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME = miniRT
 
 DEP = $(addprefix dep/, lib42 mlx_linux toolbox)
 
-HEADERS = $(addprefix -I, $(DEP)) -I/usr/include -Isrc -fopenmp
+HEADERS = $(addprefix -I, $(DEP)) -I/usr/include -Isrc
 
-LIB_LINK = $(addprefix -L, $(DEP)) -lmlx_Linux -l42 -ltoolbox -L/usr/lib -lXext -lX11 -lm -lz -fopenmp
+LIB_LINK = $(addprefix -L, $(DEP)) -lmlx_Linux -l42 -ltoolbox -L/usr/lib -lXext -lX11 -lm -lz
 
 SRC = 	$(addprefix view/, routine.c) \
 		$(addprefix controller/, \
@@ -40,7 +40,7 @@ SRC = 	$(addprefix view/, routine.c) \
 			$(addprefix scene/, \
 				$(addprefix object/, \
 					$(addprefix color/, create.c free.c) \
-					$(addprefix vector/, cross_product.c rotation.c sum.c sub.c create.c free.c scalar_product.c norm.c) \
+					$(addprefix vector/, normalize.c cross_product.c rotation.c sum.c sub.c create.c free.c scalar_product.c norm.c) \
 					$(addprefix ambient_lightning/, create.c free.c) \
 					$(addprefix camera/, create.c free.c) \
 					$(addprefix cylinder/, create.c free.c) \
