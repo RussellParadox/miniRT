@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/27 15:00:52 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/27 18:05:45 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,11 +326,11 @@ t_vector	light_point_intensity(t_light *light, t_vector normal, t_vector v, t_ve
 
 /*->->->normal*/
 //init
-t_vector	object_normal(t_obj *object, t_vector intersection);
+t_vector	object_normal(t_obj *object, t_vector intersection, t_vector d);
 //sphere
 t_vector	sphere_normal(t_sphere *sphere, t_vector intersection);
 //plane
-t_vector	plane_normal(t_plane *plane);
+t_vector	plane_normal(t_plane *plane, t_vector d);
 //cylinder
 t_vector	cylinder_normal(t_cylinder *cylinder, t_vector intersection);
 

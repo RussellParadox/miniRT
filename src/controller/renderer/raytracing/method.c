@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:37:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/27 16:45:17 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/28 09:36:55 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_color	ray_trace(t_ray ray, t_list *scene, int depth)
 	closest = closest_intersection(ray, scene);
 	if (closest.object == NULL)
 		return ((t_color){0, 0, 0, 0});
-	normal = object_normal(closest.object, ray_point(ray, closest.parameter));
+	normal = object_normal(closest.object, ray_point(ray, closest.parameter), ray.direction);
 	local_color = light_effect(normal, scene, closest, ray);
 	r = object_reflective(closest.object);
 	if (depth <= 0 || !(r > 0))
