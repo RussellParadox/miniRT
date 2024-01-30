@@ -1,33 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_method.c                                     :+:      :+:    :+:   */
+/*   find.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 12:54:20 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/19 22:21:14 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/12 14:58:14 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/29 11:17:24 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_color	*object_color(t_obj *object)
+static t_obj_type	*object_content(t_obj *object)
 {
-	static t_color	default_color = (t_color){.red = 0, .green = 0, .blue = 0};
-
-	if (object == NULL)
-		return (&default_color);
 	if (!str_cmp(object->id, "A"))
-		return (object->ambient_lightning->color);
+		return ((t_obj_type *)object->ambient_lightning);
+	else if (!str_cmp(object->id, "C"))
+		return ((t_obj_type *)object->camera);
 	else if (!str_cmp(object->id, "L"))
-		return (object->light->color);
+		return ((t_obj_type *)object->light);
 	else if (!str_cmp(object->id, "sp"))
-		return (object->sphere->color);
+		return ((t_obj_type *)object->sphere);
 	else if (!str_cmp(object->id, "pl"))
-		return (object->plane->color);
+		return ((t_obj_type *)object->plane);
 	else if (!str_cmp(object->id, "cy"))
-		return (object->cylinder->color);
-	else
-		return (&default_color);
+		return ((t_obj_type *)object->cylinder);
+	return (NULL);
+}
+
+t_obj_type	*object_find(char *id, t_list *scene)
+{
+	t_obj	*object;
+
+	while (scene != NULL)
+	{
+		object = scene->content;
+		if (!str_cmp(object->id, id))
+			return (object_content(object));
+		scene = scene->next;
+	}
+	return (NULL);
 }

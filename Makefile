@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/01/27 15:01:11 by gdornic          ###   ########.fr        #
+#    Updated: 2024/01/29 18:12:38 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,11 @@ SRC = 	$(addprefix view/, routine.c) \
 					$(addprefix light/, create.c free.c) \
 					$(addprefix plane/, create.c free.c) \
 					$(addprefix sphere/, create.c free.c) \
-					reflective_method.c ratio_method.c specular_method.c find_method.c color_method.c next_object.c create.c free.c) \
+					$(addprefix method/, \
+						$(addprefix color/, cylinder.c sphere.c plane.c routine.c) \
+						reflective.c ratio.c specular.c find.c) \
+					$(addprefix map/, create.c free.c) \
+					next_object.c create.c free.c) \
 				create.c free.c) \
 			)
 

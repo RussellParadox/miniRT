@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 19:59:07 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/27 18:02:54 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/29 16:44:04 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ t_color	light_effect(t_vector normal, t_list *scene, t_closest closest, t_ray ra
 	t_color		obj_color;
 	t_color		color;
 	t_vector	intensity;
+	t_vector	p;
 
-	obj_color = *object_color(closest.object);
-	intensity = light_intensity(normal, scene, ray_point(ray, closest.parameter), vector_sub((t_vector){0, 0, 0}, ray.direction), object_specular(closest.object));
+	p = ray_point(ray, closest.parameter);
+	obj_color = object_color(closest.object, p);
+	intensity = light_intensity(normal, scene, p, vector_sub((t_vector){0, 0, 0}, ray.direction), object_specular(closest.object));
 	color.red = obj_color.red * intensity.x;
 	color.green = obj_color.green * intensity.y;
 	color.blue = obj_color.blue * intensity.z;

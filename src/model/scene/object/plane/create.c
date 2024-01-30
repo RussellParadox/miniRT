@@ -6,11 +6,31 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:37:15 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/20 05:18:30 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/30 18:21:18 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+static void	plane_map_init(t_plane *plane, char **data)
+{
+	t_ray	    ray;
+	float		t;
+
+	if (data[5] != NULL && data[6] != NULL)
+	{
+		if (data[6][ft_strlen(data[6]) - 1] == '\n')
+			data[6][ft_strlen(data[6]) - 1] = '\0';
+		plane->texture_map = map_create(data[6]);
+		if (plane->texture_map == NULL)
+			return ;
+		ray.origin = vector_sum((t_vector){-1, 0, 0}, *plane->coordinate);
+		ray.direction = *plane->normal;
+		t = ray_plane_intersection(ray, plane);
+		plane->texture_map->v = vector_normalized(vector_sub(ray_point(ray, t), *plane->coordinate));
+		plane->texture_map->u = vector_normalized(vector_cross_product(*plane->normal, plane->texture_map->v));
+	}
+}
 
 static void	plane_init(t_plane *plane, char **data)
 {
@@ -30,6 +50,7 @@ static void	plane_init(t_plane *plane, char **data)
 	array_free(split, 2);
 	if (plane->normal == NULL)
 		return ;
+	*plane->normal = vector_normalized(*plane->normal);
 	split = ft_split(data[3], ',');
 	if (split == NULL)
 		return ;
@@ -49,13 +70,17 @@ t_plane	*plane_create(char **data)
 	plane->coordinate = NULL;
 	plane->normal = NULL;
 	plane->color = NULL;
+	plane->texture_map = NULL;
 	plane->specular = -1;
 	plane->reflective = -1;
-	if (data[4] != NULL)
-		plane->specular = ascii_to_float(data[4]);
-	if (data[4] != NULL && data[5] != NULL)
-		plane->reflective = ascii_to_float(data[5]);
 	plane_init(plane, data);
+	if (data[4] != NULL)
+	{
+		plane->specular = ascii_to_float(data[4]);
+		if (data[5] != NULL)
+			plane->reflective = ascii_to_float(data[5]);
+		plane_map_init(plane, data);
+	}
 	if (errno == ENOMEM)
 		return (plane_free(plane));
 	return (plane);

@@ -6,11 +6,21 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:52:42 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/20 05:19:16 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/30 18:21:05 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+void	sphere_map_init(t_sphere *sphere, char **data)
+{
+	if (data[5] != NULL && data[6] != NULL)
+	{
+		if (data[6][ft_strlen(data[6]) - 1] == '\n')
+			data[6][ft_strlen(data[6]) - 1] = '\0';
+		sphere->texture_map = map_create(data[6]);
+	}
+}
 
 static void	sphere_init(t_sphere *sphere, char **data)
 {
@@ -40,15 +50,19 @@ t_sphere	*sphere_create(char **data)
 	if (sphere == NULL)
 		return (NULL);
 	sphere->coordinate = NULL;
-	sphere->diameter = ascii_to_float(data[2]);
 	sphere->color = NULL;
+	sphere->texture_map = NULL;
+	sphere->diameter = ascii_to_float(data[2]);
 	sphere->specular = -1;
 	sphere->reflective = -1;
-	if (data[4] != NULL)
-		sphere->specular = ascii_to_float(data[4]);
-	if (data[4] != NULL && data[5] != NULL)
-		sphere->reflective = ascii_to_float(data[5]);
 	sphere_init(sphere, data);
+	if (data[4] != NULL)
+	{
+		sphere->specular = ascii_to_float(data[4]);
+		if (data[5] != NULL)
+			sphere->reflective = ascii_to_float(data[5]);
+		sphere_map_init(sphere, data);
+	}
 	if (errno == ENOMEM)
 		return (sphere_free(sphere));
 	return (sphere);

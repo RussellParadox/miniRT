@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 15:40:59 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/29 18:26:03 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/29 16:40:16 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/29 16:42:51 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-//loop on events hooks
-int	controller_loop(t_list	*scene)
+t_color	cylinder_color(t_cylinder *cylinder, t_vector p)
 {
-	t_mlx	*mlx;
-
-	mlx = mlx_create(WINDOW_WIDTH, WINDOW_HEIGHT, "miniRT");
-	if (mlx == NULL)
-		return (EXIT_FAILURE);
-	hook_routine(mlx, scene);
-	mlx_loop(mlx->instance);
-	mlx_free(mlx);
-	return (EXIT_SUCCESS);
+	(void)p;
+	return (*cylinder->color);
 }

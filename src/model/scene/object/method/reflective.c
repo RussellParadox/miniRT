@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
+/*   reflective.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 15:40:59 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/29 18:26:03 by gdornic          ###   ########.fr       */
+/*   Created: 2024/01/20 05:23:59 by gdornic           #+#    #+#             */
+/*   Updated: 2024/01/29 11:17:48 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-//loop on events hooks
-int	controller_loop(t_list	*scene)
+float	object_reflective(t_obj *object)
 {
-	t_mlx	*mlx;
-
-	mlx = mlx_create(WINDOW_WIDTH, WINDOW_HEIGHT, "miniRT");
-	if (mlx == NULL)
-		return (EXIT_FAILURE);
-	hook_routine(mlx, scene);
-	mlx_loop(mlx->instance);
-	mlx_free(mlx);
-	return (EXIT_SUCCESS);
+	if (!str_cmp(object->id, "sp"))
+		return (object->sphere->reflective);
+	else if (!str_cmp(object->id, "pl"))
+		return (object->plane->reflective);
+	else if (!str_cmp(object->id, "cy"))
+		return (object->cylinder->reflective);
+	else
+		return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/27 18:05:45 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/30 15:59:38 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,15 @@ typedef struct s_color
 	float	sum;
 }	t_color;
 
+typedef struct s_map
+{
+	t_color	    **color;
+	t_vector	u;
+	t_vector	v;
+	int		    height;
+	int		    width;
+}	t_map;
+
 typedef struct s_ambient_lightning
 {
 	float	ratio;
@@ -72,6 +81,7 @@ typedef struct s_sphere
 	t_color		*color;
 	float		specular;
 	float		reflective;
+	t_map		*texture_map;
 }	t_sphere;
 
 typedef struct s_plane
@@ -81,6 +91,7 @@ typedef struct s_plane
 	t_color		*color;
 	float		specular;
 	float		reflective;
+	t_map		*texture_map;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -92,6 +103,7 @@ typedef struct s_cylinder
 	t_color		*color;
 	float		specular;
 	float		reflective;
+	t_map		*texture_map;
 }	t_cylinder;
 
 typedef struct u_obj_type
@@ -169,6 +181,12 @@ void	*scene_free(t_list *scene);
 
 /*->->object*/
 
+/*->->->map*/
+//create
+t_map	*map_create(char *file_path);
+//free
+void	*map_free(t_map *map);
+
 /*->->->vector*/
 //create
 void	vector_init(t_vector *vector, float x, float y, float z);
@@ -235,16 +253,27 @@ t_cylinder	*cylinder_create(char **data);
 //free
 void	*cylinder_free(t_cylinder *cylinder);
 
-//reflective method
+/*->->->method*/
+
+//reflective
 float	object_reflective(t_obj *object);
-//ratio method
+//ratio
 float	object_ratio(t_obj *object);
-//specular method
+//specular
 float	object_specular(t_obj *object);
-//color method
-t_color	*object_color(t_obj *object);
-//find method
+//find
 t_obj_type	*object_find(char *id, t_list *scene);
+
+/*->->->->color*/
+//sphere
+t_color	sphere_color(t_sphere *sphere, t_vector p);
+//plane
+t_color	plane_color(t_plane *plane, t_vector p);
+//cylinder
+t_color	cylinder_color(t_cylinder *cylinder, t_vector p);
+//routine
+t_color	object_color(t_obj *object, t_vector p);
+
 //next object
 t_obj	*next_object(int fd);
 //create

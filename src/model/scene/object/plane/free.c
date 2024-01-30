@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:50:35 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/02 16:52:01 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/29 15:15:23 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	*plane_free(t_plane *plane)
 		vector_free(plane->normal);
 	if (plane->color != NULL)
 		color_free(plane->color);
+	if (plane->texture_map != NULL)
+		map_free(plane->texture_map);
 	free(plane);
 	return (NULL);
 }
