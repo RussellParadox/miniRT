@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:32:24 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/30 17:57:00 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/31 18:47:39 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ t_color	plane_color(t_plane *plane, t_vector p)
 	if (map == NULL)
 		return (*plane->color);
 	local = vector_sub(p, *plane->coordinate);
-	u = vector_scalar_product(local, map->u) + 0.5;
-	v = vector_scalar_product(local, map->v) + 0.5;
+	//local = change_of_basis(p, plane->transition);
+	u = vector_scalar_product(local, plane->base[0]) + 0.5;
+	v = vector_scalar_product(local, plane->base[2]) + 0.5;
 	u = u % map->width / 2 + map->width / 2;
 	v = v % map->height / 2 + map->height / 2;
 	return (map->color[u][v]);

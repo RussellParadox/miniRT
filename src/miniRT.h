@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/30 15:59:38 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/31 18:00:13 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include <math.h>
 # include <toolbox.h>
 # include <float.h>
-# include <omp.h>
 # include <time.h>
 
 typedef struct s_vector
@@ -47,8 +46,6 @@ typedef struct s_color
 typedef struct s_map
 {
 	t_color	    **color;
-	t_vector	u;
-	t_vector	v;
 	int		    height;
 	int		    width;
 }	t_map;
@@ -92,6 +89,8 @@ typedef struct s_plane
 	float		specular;
 	float		reflective;
 	t_map		*texture_map;
+	t_vector	base[3];
+	t_vector	transition[3];
 }	t_plane;
 
 typedef struct s_cylinder
@@ -191,6 +190,11 @@ void	*map_free(t_map *map);
 //create
 void	vector_init(t_vector *vector, float x, float y, float z);
 t_vector	*vector_create(char *x, char *y, char *z);
+//inverse
+void	matrix_3x3_inverse(t_vector m[3]);
+//change of basis
+void		transition_update(t_vector transition[3], t_vector base[3]);
+t_vector	change_of_basis(t_vector v, t_vector transition[3]);
 //free
 void	*vector_free(t_vector *vector);
 //scalar product
@@ -205,7 +209,8 @@ t_vector	vector_sub(t_vector v1, t_vector v2);
 float	vector_sin(t_vector v1, t_vector v2);
 float	vector_cos(t_vector v1, t_vector v2);
 t_vector	vector_rotation_cs(t_vector v, t_vector axis, float c, float s);
-void	base_rotate(t_vector base[3], t_vector direction);
+void	base_place(t_vector base[3], t_vector direction);
+void	base_rotate(t_vector base[3], t_vector axis, float angle);
 //cross product
 t_vector	vector_cross_product(t_vector v1, t_vector v2);
 //normalize
@@ -266,13 +271,13 @@ t_obj_type	*object_find(char *id, t_list *scene);
 
 /*->->->->color*/
 //sphere
-t_color	sphere_color(t_sphere *sphere, t_vector p);
+t_color	sphere_color(t_sphere *sphere, t_vector n);
 //plane
 t_color	plane_color(t_plane *plane, t_vector p);
 //cylinder
 t_color	cylinder_color(t_cylinder *cylinder, t_vector p);
 //routine
-t_color	object_color(t_obj *object, t_vector p);
+t_color	object_color(t_obj *object, t_vector p, t_vector n);
 
 //next object
 t_obj	*next_object(int fd);

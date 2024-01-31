@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:15:44 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/30 17:00:16 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/31 18:39:50 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	map_init(t_map *map, char *file_path)
 	if (instance == NULL)
 		return ;
 	img.instance = mlx_xpm_file_to_image(instance, file_path, &map->width, &map->height);
-	//printf("width: %d, height: %d\n", map->width, map->height);
 	if (img.instance != NULL)
 	{
 		map_color_allocate(map);

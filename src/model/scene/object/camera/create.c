@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:33:07 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/27 16:33:54 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/31 17:41:59 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ t_camera	*camera_create(char **data)
 	camera->base[0] = (t_vector){1, 0, 0};
 	camera->base[1] = (t_vector){0, 1, 0};
 	camera->base[2] = (t_vector){0, 0, 1};
-	base_rotate(camera->base, *camera->orientation);
+	base_place(camera->base, *camera->orientation);
 	return (camera);
 }

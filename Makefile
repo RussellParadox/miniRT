@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/01/29 18:12:38 by gdornic          ###   ########.fr        #
+#    Updated: 2024/01/31 16:10:21 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRC = 	$(addprefix view/, routine.c) \
 			$(addprefix scene/, \
 				$(addprefix object/, \
 					$(addprefix color/, create.c free.c) \
-					$(addprefix vector/, normalize.c cross_product.c rotation.c sum.c sub.c create.c free.c scalar_product.c norm.c) \
+					$(addprefix vector/, change_of_basis.c inverse.c normalize.c cross_product.c rotation.c sum.c sub.c create.c free.c scalar_product.c norm.c) \
 					$(addprefix ambient_lightning/, create.c free.c) \
 					$(addprefix camera/, create.c free.c) \
 					$(addprefix cylinder/, create.c free.c) \

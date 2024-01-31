@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 22:55:53 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/28 14:50:53 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/31 18:49:52 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,22 @@ int	controller_routine(void *param[2])
 	t_mlx	*mlx;
 	t_list	*scene;
 	t_img	*canva;
+	t_plane	*plane;
+	clock_t	delta;
 
 	mlx = param[0];
 	scene = param[1];
+	plane = (t_plane *)object_find("pl", scene);
+	base_rotate(plane->base, (t_vector){0, 0, 1}, M_PI / 60);
+	*plane->normal = plane->base[1];
+	transition_update(plane->transition, plane->base);
+	delta = clock();
 	canva = image_create(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (canva == NULL)
 		return (-1);
 	raytracing_render(canva, scene);
+	delta = clock() - delta;
+	printf("%f ms\n", (float)delta * 1000.0 / CLOCKS_PER_SEC);
 	view_routine(canva, mlx);
 	image_free(canva, mlx);
 	if (errno == ENOMEM)

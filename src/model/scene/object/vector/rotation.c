@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:03:45 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/26 15:10:50 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/31 17:52:21 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_vector	vector_rotation_cs(t_vector v, t_vector axis, float c, float s)
 	(axis.z * axis.z * (1 - c) + c) * v.z});
 }
 
-void	base_rotate(t_vector base[3], t_vector direction)
+void	base_place(t_vector base[3], t_vector direction)
 {
 	t_vector	axis;
 	float		c;
@@ -47,6 +47,18 @@ void	base_rotate(t_vector base[3], t_vector direction)
 	axis = vector_cross_product(direction, base[2]);
 	c = vector_cos(direction, base[2]);
 	s = vector_sin(direction, base[2]);
+	base[0] = vector_rotation_cs(base[0], axis, c, s);
+	base[1] = vector_rotation_cs(base[1], axis, c, s);
+	base[2] = vector_rotation_cs(base[2], axis, c, s);
+}
+
+void	base_rotate(t_vector base[3], t_vector axis, float angle)
+{
+	float	c;
+	float	s;
+
+	c = cosf(angle);
+	s = sinf(angle);
 	base[0] = vector_rotation_cs(base[0], axis, c, s);
 	base[1] = vector_rotation_cs(base[1], axis, c, s);
 	base[2] = vector_rotation_cs(base[2], axis, c, s);

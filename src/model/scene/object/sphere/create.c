@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:52:42 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/30 18:21:05 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/01/31 09:58:51 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	sphere_map_init(t_sphere *sphere, char **data)
 		if (data[6][ft_strlen(data[6]) - 1] == '\n')
 			data[6][ft_strlen(data[6]) - 1] = '\0';
 		sphere->texture_map = map_create(data[6]);
+		if (sphere->texture_map == NULL)
+			return ;
 	}
 }
 
