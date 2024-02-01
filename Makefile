@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/02/01 17:57:18 by gdornic          ###   ########.fr        #
+#    Updated: 2024/02/01 18:14:52 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,18 +67,20 @@ define make_dep
 	done
 endef
 
-all: $(NAME)
+all: obj_tree $(NAME)
+
+obj_tree:
+	mkdir -p $(dir $(OBJ))
 
 $(NAME): $(OBJ)
 	$(call make_dep,all)
 	$(CC) $(OBJ) $(HEADERS) $(LIB_LINK) -o $(NAME)
 
 obj/%.o: src/%.c
-	mkdir -p $(dir $<)
 	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -rf obj
 	$(call make_dep,clean)
 
 fclean: clean

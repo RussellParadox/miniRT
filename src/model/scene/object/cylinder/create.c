@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 15:47:07 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/01 17:15:21 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/01 18:15:49 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	cylinder_map_init(t_cylinder *cylinder, char **data)
 	cylinder->base[2] = vector_normalized(vector_sub(ray_point(ray, t), *cylinder->coordinate));
 	cylinder->base[1] = *cylinder->axis;
 	cylinder->base[0] = vector_normalized(vector_cross_product(cylinder->base[1], cylinder->base[2]));
-	printf("base.x: %f, .y: %f, .z: %f\n", cylinder->base[2].x, cylinder->base[2].y, cylinder->base[2].z);
-	printf("base.x: %f, .y: %f, .z: %f\n", cylinder->base[0].x, cylinder->base[0].y, cylinder->base[0].z);
 	if (data[7] != NULL && data[8] != NULL)
 	{
 		if (data[8][ft_strlen(data[8]) - 1] == '\n')
