@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 15:47:07 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/30 18:20:46 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/01 17:15:21 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,20 @@
 
 void	cylinder_map_init(t_cylinder *cylinder, char **data)
 {
+	t_plane		plane;
+	t_ray	    ray;
+	float		t;
+
+	ray.origin = vector_sum((t_vector){cylinder->axis->y, -cylinder->axis->z, cylinder->axis->x}, *cylinder->coordinate);
+	ray.direction = *cylinder->axis;
+	plane.coordinate = cylinder->coordinate;
+	plane.normal = cylinder->axis;
+	t = ray_plane_intersection(ray, &plane);
+	cylinder->base[2] = vector_normalized(vector_sub(ray_point(ray, t), *cylinder->coordinate));
+	cylinder->base[1] = *cylinder->axis;
+	cylinder->base[0] = vector_normalized(vector_cross_product(cylinder->base[1], cylinder->base[2]));
+	printf("base.x: %f, .y: %f, .z: %f\n", cylinder->base[2].x, cylinder->base[2].y, cylinder->base[2].z);
+	printf("base.x: %f, .y: %f, .z: %f\n", cylinder->base[0].x, cylinder->base[0].y, cylinder->base[0].z);
 	if (data[7] != NULL && data[8] != NULL)
 	{
 		if (data[8][ft_strlen(data[8]) - 1] == '\n')
@@ -40,6 +54,7 @@ static void	cylinder_init(t_cylinder *cylinder, char **data)
 	array_free(split, 2);
 	if (cylinder->axis == NULL)
 		return ;
+	*cylinder->axis = vector_normalized(*cylinder->axis);
 	split = ft_split(data[5], ',');
 	if (split == NULL)
 		return ;
@@ -64,6 +79,7 @@ t_cylinder	*cylinder_create(char **data)
 	cylinder->height = ascii_to_float(data[4]);
 	cylinder->specular = -1;
 	cylinder->reflective = -1;
+	cylinder_init(cylinder, data);
 	if (data[6] != NULL)
 	{
 		cylinder->specular = ascii_to_float(data[6]);
@@ -71,7 +87,6 @@ t_cylinder	*cylinder_create(char **data)
 			cylinder->reflective = ascii_to_float(data[7]);
 		cylinder_map_init(cylinder, data);
 	}
-	cylinder_init(cylinder, data);
 	if (errno == ENOMEM)
 		return (cylinder_free(cylinder));
 	return (cylinder);

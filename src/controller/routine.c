@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 22:55:53 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/31 18:49:52 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/01 16:35:30 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,14 @@ int	controller_routine(void *param[2])
 	t_mlx	*mlx;
 	t_list	*scene;
 	t_img	*canva;
-	t_plane	*plane;
 	clock_t	delta;
+	t_cylinder	*cylinder;
 
 	mlx = param[0];
 	scene = param[1];
-	plane = (t_plane *)object_find("pl", scene);
-	base_rotate(plane->base, (t_vector){0, 0, 1}, M_PI / 60);
-	*plane->normal = plane->base[1];
-	transition_update(plane->transition, plane->base);
 	delta = clock();
+	cylinder = (t_cylinder *)object_find("cy", scene);
+	base_rotate(cylinder->base, *cylinder->axis, M_PI / 60);
 	canva = image_create(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (canva == NULL)
 		return (-1);

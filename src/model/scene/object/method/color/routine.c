@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:54:20 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/31 10:11:36 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/01 13:34:37 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_color	object_color(t_obj *object, t_vector p, t_vector n)
 	else if (!str_cmp(object->id, "pl"))
 		return (plane_color(object->plane, p));
 	else if (!str_cmp(object->id, "cy"))
-		return (cylinder_color(object->cylinder, p));
+		return (cylinder_color(object->cylinder, p, n));
 	else
 		return (default_color);
 }

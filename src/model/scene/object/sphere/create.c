@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:52:42 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/31 09:58:51 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/01 12:39:17 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	sphere_map_init(t_sphere *sphere, char **data)
 {
+	sphere->base[0] = (t_vector){0, 0, -1};
+	sphere->base[1] = (t_vector){0, 1, 0};
+	sphere->base[2] = (t_vector){1, 0, 0};
 	if (data[5] != NULL && data[6] != NULL)
 	{
 		if (data[6][ft_strlen(data[6]) - 1] == '\n')

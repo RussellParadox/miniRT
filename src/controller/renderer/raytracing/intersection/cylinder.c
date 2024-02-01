@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 00:05:19 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/25 13:35:32 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/01 13:22:17 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static float	height_length(t_ray ray, t_cylinder *cylinder, float parameter)
 	rc.x = ray.origin.x + parameter * ray.direction.x - cylinder->coordinate->x;
 	rc.y = ray.origin.y + parameter * ray.direction.y - cylinder->coordinate->y;
 	rc.z = ray.origin.z + parameter * ray.direction.z - cylinder->coordinate->z;
-	return (2 * fabsf(vector_scalar_product(rc, *cylinder->axis)) / vector_norm(*cylinder->axis));
+	return (2 * fabsf(vector_scalar_product(rc, *cylinder->axis)));
 }
 
 static float	disc_diameter(t_ray ray, t_cylinder *cylinder, float parameter)
@@ -72,10 +72,10 @@ static float	disc_intersection(t_ray ray, t_cylinder *cylinder, t_vector oc)
 	directions_product = vector_scalar_product(ray.direction, *cylinder->axis);
 	if (fabsf(directions_product) < PRECISION)
 		return (FLT_MAX);
-	parameter1 = (cylinder->height * vector_norm(*cylinder->axis) - 2 * vector_scalar_product(oc, *cylinder->axis)) / (2 * directions_product);
+	parameter1 = (cylinder->height - 2 * vector_scalar_product(oc, *cylinder->axis)) / (2 * directions_product);
 	if (disc_diameter(ray, cylinder, parameter1) > cylinder->diameter)
 		parameter1 = FLT_MAX;
-	parameter2 = (-cylinder->height * vector_norm(*cylinder->axis) - 2 * vector_scalar_product(oc, *cylinder->axis)) / (2 * directions_product);
+	parameter2 = (-cylinder->height - 2 * vector_scalar_product(oc, *cylinder->axis)) / (2 * directions_product);
 	if (disc_diameter(ray, cylinder, parameter2) > cylinder->diameter)
 		parameter2 = FLT_MAX;
 	if (parameter1 < parameter2 && parameter1 > ray.parameter_min)

@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/31 18:00:13 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/01 17:31:16 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_sphere
 	float		specular;
 	float		reflective;
 	t_map		*texture_map;
+	t_vector	base[3];
 }	t_sphere;
 
 typedef struct s_plane
@@ -90,7 +91,6 @@ typedef struct s_plane
 	float		reflective;
 	t_map		*texture_map;
 	t_vector	base[3];
-	t_vector	transition[3];
 }	t_plane;
 
 typedef struct s_cylinder
@@ -103,6 +103,7 @@ typedef struct s_cylinder
 	float		specular;
 	float		reflective;
 	t_map		*texture_map;
+	t_vector	base[3];
 }	t_cylinder;
 
 typedef struct u_obj_type
@@ -275,7 +276,7 @@ t_color	sphere_color(t_sphere *sphere, t_vector n);
 //plane
 t_color	plane_color(t_plane *plane, t_vector p);
 //cylinder
-t_color	cylinder_color(t_cylinder *cylinder, t_vector p);
+t_color	cylinder_color(t_cylinder *cylinder, t_vector p, t_vector n);
 //routine
 t_color	object_color(t_obj *object, t_vector p, t_vector n);
 
@@ -366,6 +367,7 @@ t_vector	sphere_normal(t_sphere *sphere, t_vector intersection);
 //plane
 t_vector	plane_normal(t_plane *plane, t_vector d);
 //cylinder
+t_vector	height_normal(t_vector axis, t_vector rc, float norm);
 t_vector	cylinder_normal(t_cylinder *cylinder, t_vector intersection);
 
 # define CAMERA_VIEWPORT_DISTANCE 1

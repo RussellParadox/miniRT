@@ -6,19 +6,11 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:54:17 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/31 17:53:14 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/01 12:39:49 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-void		transition_update(t_vector transition[3], t_vector base[3])
-{
-	transition[0] = base[0];
-	transition[1] = base[1];
-	transition[2] = base[2];
-	matrix_3x3_inverse(transition);
-}
 
 t_vector	change_of_basis(t_vector v, t_vector transition[3])
 {
