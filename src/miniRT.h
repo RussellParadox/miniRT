@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/01 17:31:16 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/02 15:52:27 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_sphere
 	float		specular;
 	float		reflective;
 	t_map		*texture_map;
+	t_map		*normal_map;
 	t_vector	base[3];
 }	t_sphere;
 
@@ -90,6 +91,7 @@ typedef struct s_plane
 	float		specular;
 	float		reflective;
 	t_map		*texture_map;
+	t_map		*normal_map;
 	t_vector	base[3];
 }	t_plane;
 
@@ -103,6 +105,7 @@ typedef struct s_cylinder
 	float		specular;
 	float		reflective;
 	t_map		*texture_map;
+	t_map		*normal_map;
 	t_vector	base[3];
 }	t_cylinder;
 
@@ -191,11 +194,12 @@ void	*map_free(t_map *map);
 //create
 void	vector_init(t_vector *vector, float x, float y, float z);
 t_vector	*vector_create(char *x, char *y, char *z);
-//inverse
+//matrix transpose
+void	matrix_3x3_transpose(t_vector m[3]);
+//matrix inverse
 void	matrix_3x3_inverse(t_vector m[3]);
-//change of basis
-void		transition_update(t_vector transition[3], t_vector base[3]);
-t_vector	change_of_basis(t_vector v, t_vector transition[3]);
+//matrix product
+t_vector	vector_matrix_product(t_vector v, t_vector m[3]);
 //free
 void	*vector_free(t_vector *vector);
 //scalar product
@@ -270,6 +274,14 @@ float	object_specular(t_obj *object);
 //find
 t_obj_type	*object_find(char *id, t_list *scene);
 
+/*->->->->mapping*/
+//plane
+t_color	plane_mapping(t_plane *plane, t_map *map, t_vector p);
+//sphere
+t_color	sphere_mapping(t_sphere *sphere, t_map *map, t_vector n);
+//cylinder
+t_color	cylinder_mapping(t_cylinder *cylinder, t_map *map, t_vector p, t_vector n);
+
 /*->->->->color*/
 //sphere
 t_color	sphere_color(t_sphere *sphere, t_vector n);
@@ -279,6 +291,16 @@ t_color	plane_color(t_plane *plane, t_vector p);
 t_color	cylinder_color(t_cylinder *cylinder, t_vector p, t_vector n);
 //routine
 t_color	object_color(t_obj *object, t_vector p, t_vector n);
+
+/*->->->->bump*/
+//sphere
+t_vector	sphere_bump(t_sphere *sphere, t_vector n);
+//plane
+t_vector	plane_bump(t_plane *plane, t_vector p);
+//cylinder
+t_vector	cylinder_bump(t_cylinder *cylinder, t_vector p, t_vector n);
+//routine
+t_vector	bump_normal(t_obj *object, t_vector p, t_vector n);
 
 //next object
 t_obj	*next_object(int fd);

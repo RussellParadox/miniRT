@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:37:15 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/01 15:22:13 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:32:29 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,12 @@ static void	plane_map_init(t_plane *plane, char **data)
 		if (data[6][ft_strlen(data[6]) - 1] == '\n')
 			data[6][ft_strlen(data[6]) - 1] = '\0';
 		plane->texture_map = map_create(data[6]);
-		if (plane->texture_map == NULL)
-			return ;
+		if (data[7] != NULL)
+		{
+			if (data[7][ft_strlen(data[7]) - 1] == '\n')
+				data[7][ft_strlen(data[7]) - 1] = '\0';
+			plane->normal_map = map_create(data[7]);
+		}
 	}
 }
 
@@ -72,6 +76,7 @@ t_plane	*plane_create(char **data)
 	plane->normal = NULL;
 	plane->color = NULL;
 	plane->texture_map = NULL;
+	plane->normal_map = NULL;
 	plane->specular = -1;
 	plane->reflective = -1;
 	plane_init(plane, data);

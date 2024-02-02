@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/02/01 18:14:52 by gdornic          ###   ########.fr        #
+#    Updated: 2024/02/02 15:42:44 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRC = 	$(addprefix view/, routine.c) \
 			$(addprefix scene/, \
 				$(addprefix object/, \
 					$(addprefix color/, create.c free.c) \
-					$(addprefix vector/, change_of_basis.c inverse.c normalize.c cross_product.c rotation.c sum.c sub.c create.c free.c scalar_product.c norm.c) \
+					$(addprefix vector/, matrix_transpose.c matrix_product.c matrix_inverse.c normalize.c cross_product.c rotation.c sum.c sub.c create.c free.c scalar_product.c norm.c) \
 					$(addprefix ambient_lightning/, create.c free.c) \
 					$(addprefix camera/, create.c free.c) \
 					$(addprefix cylinder/, create.c free.c) \
@@ -48,7 +48,9 @@ SRC = 	$(addprefix view/, routine.c) \
 					$(addprefix plane/, create.c free.c) \
 					$(addprefix sphere/, create.c free.c) \
 					$(addprefix method/, \
+						$(addprefix mapping/, cylinder.c sphere.c plane.c) \
 						$(addprefix color/, cylinder.c sphere.c plane.c routine.c) \
+						$(addprefix bump/, plane.c sphere.c cylinder.c routine.c) \
 						reflective.c ratio.c specular.c find.c) \
 					$(addprefix map/, create.c free.c) \
 					next_object.c create.c free.c) \
