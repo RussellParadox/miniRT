@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 09:41:50 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/02 18:33:56 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/02 19:15:24 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ t_vector	plane_bump(t_plane *plane, t_vector p)
 		return ((t_vector){0, 0, 0});
 	color = plane_mapping(plane, map, p);
 	bump = (t_vector){2.0 * color.red / 255 - 1, 2.0 * color.green / 255 - 1, 2.0 * color.blue / 255 - 1};
-	bump = vector_normalized(bump);
-	tbn[0] = plane->base[1];
-	tbn[1] = plane->base[2];
-	tbn[2] = plane->base[0];
+	tbn[0] = plane->base[2];
+	tbn[1] = plane->base[0];
+	tbn[2] = plane->base[1];
 	matrix_3x3_inverse(tbn);
 	matrix_3x3_transpose(tbn);
-	return (vector_matrix_product(bump, tbn));
+	return (vector_normalized(vector_matrix_product(bump, tbn)));
 }
