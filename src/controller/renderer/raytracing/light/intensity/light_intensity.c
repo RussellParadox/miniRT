@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 03:37:14 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/25 14:24:30 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/05 10:35:27 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_vector	light_intensity(t_vector normal, t_list *scene, t_vector p, t_vector v,
 	t_vector	max_sum;
 	t_vector	intensity;
 	t_vector	l;
+	t_closest	closest;
 
 	intensity = (t_vector){0, 0, 0};
 	max_sum = (t_vector){0, 0, 0};
@@ -43,8 +44,9 @@ t_vector	light_intensity(t_vector normal, t_list *scene, t_vector p, t_vector v,
 		}
 		else if (!str_cmp(i->id, "L"))
 		{
-			l = vector_sub(*i->light->coordinate, p);
-			if (closest_intersection((t_ray){p, l, PRECISION}, scene).object == NULL)
+			l = vector_normalized(vector_sub(*i->light->coordinate, p));
+			closest = closest_intersection((t_ray){p, l, 1}, scene);
+			if (closest.object == NULL || closest.parameter > vector_norm(l))
 				intensity = vector_sum(intensity, light_point_intensity(i->light, normal, v, l, s));
 			max_sum = vector_sum(max_sum, intensity_max(i->light->ratio, *i->light->color));
 		}

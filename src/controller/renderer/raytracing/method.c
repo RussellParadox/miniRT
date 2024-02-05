@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:37:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/28 09:36:55 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/05 11:04:33 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	raytracing_method(t_img *canva, t_list *scene, t_viewport viewport)
 		while (y <= canva->height / 2)
 		{
 			ray.direction = ray_direction(camera->base, x * viewport.width_ratio, y * viewport.height_ratio, CAMERA_VIEWPORT_DISTANCE);
-			color = ray_trace(ray, scene, 2);
+			color = ray_trace(ray, scene, 3);
 			canva_pixel_put(canva, x, y, trgb_create(0, color.red, color.green, color.blue));
 			y++;
 		}

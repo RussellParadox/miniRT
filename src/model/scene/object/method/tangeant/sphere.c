@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 16:07:55 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/05 10:46:54 by gdornic          ###   ########.fr       */
+/*   Created: 2024/02/03 17:23:13 by gdornic           #+#    #+#             */
+/*   Updated: 2024/02/03 18:42:02 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	*cylinder_free(t_cylinder *cylinder)
+t_vector	sphere_tangeant(float r, float theta, float phi)
 {
-	if (cylinder->coordinate != NULL)
-		vector_free(cylinder->coordinate);
-	if (cylinder->axis != NULL)
-		vector_free(cylinder->axis);
-	if (cylinder->color != NULL)
-		color_free(cylinder->color);
-	if (cylinder->texture_map != NULL)
-		map_free(cylinder->texture_map);
-	if (cylinder->normal_map != NULL)
-		map_free(cylinder->normal_map);
-	free(cylinder);
-	return (NULL);
+	return (vector_normalized((t_vector){-r * sinf(phi) * sinf(theta), \
+	0, \
+	r * sinf(phi) * cosf(theta)}));
 }

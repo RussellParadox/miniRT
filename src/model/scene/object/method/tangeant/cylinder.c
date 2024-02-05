@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 16:07:55 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/05 10:46:54 by gdornic          ###   ########.fr       */
+/*   Created: 2024/02/03 17:46:03 by gdornic           #+#    #+#             */
+/*   Updated: 2024/02/03 18:42:29 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	*cylinder_free(t_cylinder *cylinder)
+t_vector	cylinder_disc_tangeant(t_vector axis, t_vector pc)
 {
-	if (cylinder->coordinate != NULL)
-		vector_free(cylinder->coordinate);
-	if (cylinder->axis != NULL)
-		vector_free(cylinder->axis);
-	if (cylinder->color != NULL)
-		color_free(cylinder->color);
-	if (cylinder->texture_map != NULL)
-		map_free(cylinder->texture_map);
-	if (cylinder->normal_map != NULL)
-		map_free(cylinder->normal_map);
-	free(cylinder);
-	return (NULL);
+	return (vector_normalized(cylinder_height_normal(axis, pc, \
+	vector_scalar_product(pc, axis))));
+}
+
+t_vector	cylinder_height_tangeant(float r, float theta)
+{
+	return (vector_normalized((t_vector){-r * sinf(theta), \
+	0, \
+	r * cosf(theta)}));
 }

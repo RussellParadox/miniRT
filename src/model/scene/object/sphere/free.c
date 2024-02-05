@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:58:50 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/29 16:15:21 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/05 10:46:10 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	*sphere_free(t_sphere *sphere)
 		color_free(sphere->color);
 	if (sphere->texture_map != NULL)
 		map_free(sphere->texture_map);
+	if (sphere->normal_map != NULL)
+		map_free(sphere->normal_map);
 	free(sphere);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/02 15:52:27 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/05 11:34:35 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,8 @@ typedef struct s_obj
 	};
 }	t_obj;
 
-# define WINDOW_WIDTH 700
-# define WINDOW_HEIGHT 700
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 800
 typedef struct s_mlx
 {
 	void	*instance;
@@ -302,6 +302,24 @@ t_vector	cylinder_bump(t_cylinder *cylinder, t_vector p, t_vector n);
 //routine
 t_vector	bump_normal(t_obj *object, t_vector p, t_vector n);
 
+/*->->->->normal*/
+//init
+t_vector	object_normal(t_obj *object, t_vector intersection, t_vector d);
+//sphere
+t_vector	sphere_normal(t_sphere *sphere, t_vector intersection);
+//plane
+t_vector	plane_normal(t_plane *plane, t_vector d);
+//cylinder
+t_vector	cylinder_height_normal(t_vector axis, t_vector rc, float norm);
+t_vector	cylinder_normal(t_cylinder *cylinder, t_vector intersection);
+
+/*->->->->tangeant*/
+//sphere
+t_vector	sphere_tangeant(float r, float theta, float phi);
+//cylinder
+t_vector	cylinder_disc_tangeant(t_vector axis, t_vector pc);
+t_vector	cylinder_height_tangeant(float r, float theta);
+
 //next object
 t_obj	*next_object(int fd);
 //create
@@ -373,7 +391,7 @@ t_color	light_effect(t_vector normal, t_list *scene, t_closest closest, t_ray ra
 //reflection
 t_vector	reflection(t_vector normal, t_vector d);
 
-/*->->->->model*/
+/*->->->->intensity*/
 //light intensity
 t_vector	light_intensity(t_vector normal, t_list *scene, t_vector p, t_vector v, float s);
 //ambient lightning
@@ -381,16 +399,6 @@ t_vector	ambient_lightning_intensity(t_ambient_lightning *ambient_lightning);
 //light point
 t_vector	light_point_intensity(t_light *light, t_vector normal, t_vector v, t_vector l, float s);
 
-/*->->->normal*/
-//init
-t_vector	object_normal(t_obj *object, t_vector intersection, t_vector d);
-//sphere
-t_vector	sphere_normal(t_sphere *sphere, t_vector intersection);
-//plane
-t_vector	plane_normal(t_plane *plane, t_vector d);
-//cylinder
-t_vector	height_normal(t_vector axis, t_vector rc, float norm);
-t_vector	cylinder_normal(t_cylinder *cylinder, t_vector intersection);
 
 # define CAMERA_VIEWPORT_DISTANCE 1
 //method

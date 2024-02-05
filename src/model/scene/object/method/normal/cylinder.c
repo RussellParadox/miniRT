@@ -6,13 +6,13 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 05:41:27 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/01 17:30:24 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/03 18:04:53 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_vector	height_normal(t_vector axis, t_vector rc, float norm)
+t_vector	cylinder_height_normal(t_vector axis, t_vector rc, float norm)
 {
 	t_vector	normal;
 
@@ -22,7 +22,7 @@ t_vector	height_normal(t_vector axis, t_vector rc, float norm)
 	return (normal);
 }
 
-static t_vector	disc_normal(t_vector axis, t_vector rc)
+static t_vector	cylinder_disc_normal(t_vector axis, t_vector rc)
 {
 	t_vector	normal;
 
@@ -53,9 +53,9 @@ t_vector	cylinder_normal(t_cylinder *cylinder, t_vector intersection)
 	rc.z = intersection.z - cylinder->coordinate->z;
 	axis_projection_norm = vector_scalar_product(rc, *cylinder->axis);
 	if (fabsf(fabsf(axis_projection_norm) - cylinder->height / 2) < PRECISION)
-		normal = disc_normal(*cylinder->axis, rc);
+		normal = cylinder_disc_normal(*cylinder->axis, rc);
 	else
-		normal = height_normal(*cylinder->axis, rc, axis_projection_norm);
+		normal = cylinder_height_normal(*cylinder->axis, rc, axis_projection_norm);
 	norm = vector_norm(normal);
 	normal.x /= norm;
 	normal.y /= norm;
