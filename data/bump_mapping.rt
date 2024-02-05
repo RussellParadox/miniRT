@@ -1,0 +1,11 @@
+A 0.8 255,255,255
+C 0,0,0 0,0,1 90
+L 0,20,0 1 255,255,255
+L 0,0,0 1 255,255,255
+L 0,-20,0 1 255,255,255
+sp 15,20,30 10 255,255,255 -1 -1 ./data/texture/8k_earth.xpm ./data/normal/earthbump1k_n.xpm
+sp -15,20,30 10 255,255,255 -1 -1 . ./data/normal/earthbump1k_n.xpm
+cy 15,0,30 -1,1,1 10 10 255,255,255 5000 -1 ./data/texture/8k_earth.xpm ./data/normal/ondulation_n.xpm
+cy -15,0,30 1,1,1 10 10 255,255,255 5000 -1 . ./data/normal/ondulation_n.xpm
+pl 15,-200,30 1,0,1 255,255,255 100 -1 . ./data/normal/ondulation_n.xpm
+pl -15,-200,30 -1,0,1 255,255,255 100 -1 . ./data/normal/ondulation_n.xpm

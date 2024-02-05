@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/05 11:34:35 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/05 12:11:51 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,6 +319,7 @@ t_vector	sphere_tangeant(float r, float theta, float phi);
 //cylinder
 t_vector	cylinder_disc_tangeant(t_vector axis, t_vector pc);
 t_vector	cylinder_height_tangeant(float r, float theta);
+t_vector	cylinder_tangeant(t_cylinder *cylinder, t_vector pc, float theta);
 
 //next object
 t_obj	*next_object(int fd);
