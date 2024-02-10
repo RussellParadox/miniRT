@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/10 18:04:02 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/10 19:06:46 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,6 +361,8 @@ int	trgb_create(int t, int r, int g, int b);
 void	canva_pixel_put(t_img *canva, int x, int y, int color);
 
 /*->hook*/
+//key
+int	key_hook(int keycode, void *param[2]);
 //routine
 void	hook_routine(t_mlx *mlx, t_list *scene);
 //loop end

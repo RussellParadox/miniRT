@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/02/10 16:43:38 by gdornic          ###   ########.fr        #
+#    Updated: 2024/02/10 19:07:04 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC = 	$(addprefix view/, routine.c) \
 					method.c render.c) \
 				draw_circle.c) \
 			$(addprefix mlx/, create.c free.c) \
-			$(addprefix hook/, routine.c loop_end.c) \
+			$(addprefix hook/, key.c routine.c loop_end.c) \
 			$(addprefix image/, \
 				$(addprefix color_trgb/, create.c) \
 				create.c pixel_put.c free.c) \
