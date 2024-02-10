@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/10 16:43:09 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/10 18:04:02 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <math.h>
 # include <toolbox.h>
 # include <float.h>
+# include <time.h>
 
 typedef struct s_vector
 {
@@ -381,10 +382,15 @@ int	plane_rule(char **data);
 //sphere
 int	sphere_rule(char **data);
 //rgb
+int	rgb_rule(char *rgb);
 //float
+int	float_rule(char *f);
 //int
+int	int_rule(char *n);
 //vector
+int	vector_rule(char *v);
 //vector normalized
+int	vector_normalized_rule(char *vn);
 
 //put error
 int	put_error(char *msg);

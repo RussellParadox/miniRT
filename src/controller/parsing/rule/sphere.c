@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 11:53:57 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/10 16:30:28 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/10 18:02:06 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	sphere_rule(char **data)
 	if (vector_rule(data[1]))
 		return (put_error("Sphere: coordinate: wrong vector format"));
 	if (float_rule(data[2]))
-		return (put_error("Sphere: diameter: wrong float format"))
+		return (put_error("Sphere: diameter: wrong float format"));
 	if (rgb_rule(data[3]))
 		return (put_error("Sphere: color: wrong RGB format"));
 	return (0);

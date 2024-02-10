@@ -6,12 +6,26 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 16:41:01 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/10 16:41:17 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/10 18:02:21 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	int_rule(char *i)
+int	int_rule(char *n)
 {
+	int	i;
+
+	i = 0;
+	if (n[0] == '-' || n[0] == '+')
+		i = 1;
+	if (!(n[i]))
+		return (1);
+	while (n[i])
+	{
+		if (!ft_isdigit(n[i]))
+			return (1);
+		i++;
+	}
+	return (0);
 }

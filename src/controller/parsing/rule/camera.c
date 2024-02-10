@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 11:52:48 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/10 15:47:53 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/10 18:01:41 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	camera_rule(char **data)
 {
 	static int	C_count = 0;
 	int			data_len;
+	int			fov;
 
 	C_count++;
 	if (C_count > 1)
