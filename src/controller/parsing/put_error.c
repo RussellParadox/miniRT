@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toolbox.h                                          :+:      :+:    :+:   */
+/*   put_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 08:34:09 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/10 16:35:08 by gdornic          ###   ########.fr       */
+/*   Created: 2024/02/10 12:46:12 by gdornic           #+#    #+#             */
+/*   Updated: 2024/02/10 12:48:09 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOOLBOX_H
-# define TOOLBOX_H
-# include <stdlib.h>
-# include <math.h>
+#include "miniRT.h"
 
-//array free
-void	array_free(void *root, unsigned int dimension);
-
-//ascii to float
-float	ascii_to_float(char *str);
-
-//str cmp
-int		str_cmp(char *s1, char *s2);
-
-//split len
-int		split_len(char **split);
-
-#endif
+int	put_error(char *msg)
+{
+	ft_putstr_fd("Error\n\t", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
+	return (1);
+}

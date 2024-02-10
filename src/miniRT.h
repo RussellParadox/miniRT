@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/05 12:11:51 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/10 16:43:09 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include <math.h>
 # include <toolbox.h>
 # include <float.h>
-# include <time.h>
 
 typedef struct s_vector
 {
@@ -322,6 +321,7 @@ t_vector	cylinder_height_tangeant(float r, float theta);
 t_vector	cylinder_tangeant(t_cylinder *cylinder, t_vector pc, float theta);
 
 //next object
+int	is_empty(char *line);
 t_obj	*next_object(int fd);
 //create
 t_obj	*object_create(char **data);
@@ -364,6 +364,32 @@ void	canva_pixel_put(t_img *canva, int x, int y, int color);
 void	hook_routine(t_mlx *mlx, t_list *scene);
 //loop end
 int	loop_end_hook(void *param[2]);
+
+/*->parsing*/
+
+/*->->rule*/
+//ambient lightning
+int	ambient_lightning_rule(char **data);
+//camera
+int	camera_rule(char **data);
+//cylinder
+int	cylinder_rule(char **data);
+//light
+int	light_rule(char **data);
+//plane
+int	plane_rule(char **data);
+//sphere
+int	sphere_rule(char **data);
+//rgb
+//float
+//int
+//vector
+//vector normalized
+
+//put error
+int	put_error(char *msg);
+//argument fail
+int	argument_fail(int argc, char *argv[]);
 
 /*->renderer*/
 //draw circle

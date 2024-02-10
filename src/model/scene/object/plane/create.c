@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:37:15 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/02 18:32:29 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/10 11:27:06 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static void	plane_map_init(t_plane *plane, char **data)
 	plane->base[0] = vector_normalized(vector_cross_product(*plane->normal, plane->base[2]));
 	if (data[5] != NULL && data[6] != NULL)
 	{
-		if (data[6][ft_strlen(data[6]) - 1] == '\n')
-			data[6][ft_strlen(data[6]) - 1] = '\0';
 		plane->texture_map = map_create(data[6]);
 		if (data[7] != NULL)
 		{

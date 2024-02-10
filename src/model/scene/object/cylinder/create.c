@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 15:47:07 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/02 15:54:37 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/10 15:55:38 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	cylinder_map_init(t_cylinder *cylinder, char **data)
 	cylinder->base[0] = vector_normalized(vector_cross_product(cylinder->base[1], cylinder->base[2]));
 	if (data[7] != NULL && data[8] != NULL)
 	{
-		if (data[8][ft_strlen(data[8]) - 1] == '\n')
-			data[8][ft_strlen(data[8]) - 1] = '\0';
 		cylinder->texture_map = map_create(data[8]);
 		if (data[9] != NULL)
 		{
@@ -80,8 +78,8 @@ t_cylinder	*cylinder_create(char **data)
 	cylinder->color = NULL;
 	cylinder->texture_map = NULL;
 	cylinder->normal_map = NULL;
-	cylinder->diameter = ascii_to_float(data[3]);
-	cylinder->height = ascii_to_float(data[4]);
+	cylinder->diameter = fabsf(ascii_to_float(data[3]));
+	cylinder->height = fabsf(ascii_to_float(data[4]));
 	cylinder->specular = -1;
 	cylinder->reflective = -1;
 	cylinder_init(cylinder, data);

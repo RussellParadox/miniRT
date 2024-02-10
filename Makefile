@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/02/05 13:17:56 by gdornic          ###   ########.fr        #
+#    Updated: 2024/02/10 16:43:38 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,9 @@ SRC = 	$(addprefix view/, routine.c) \
 				$(addprefix color_trgb/, create.c) \
 				create.c pixel_put.c free.c) \
 			$(addprefix canva/, pixel_put.c) \
+			$(addprefix parsing/, \
+				$(addprefix rule/, ambient_lightning.c camera.c cylinder.c light.c plane.c sphere.c rgb.c float.c int.c vector.c vector_normalized.c) \
+				argument_fail.c put_error.c) \
 			main.c loop.c routine.c) \
 		$(addprefix model/, \
 			$(addprefix scene/, \

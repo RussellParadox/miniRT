@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:55:00 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/19 21:05:08 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/10 11:51:00 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ int	main(int argc, char *argv[])
 	int		status;
 
 	errno = 0;
-	(void)argc;
- /*
-	if (argument_check(argc, argv))
+	if (argument_fail(argc, argv))
 		return (EXIT_FAILURE);
-*/
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:52:42 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/02 17:53:21 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/10 16:22:47 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	sphere_map_init(t_sphere *sphere, char **data)
 	sphere->base[2] = (t_vector){1, 0, 0};
 	if (data[5] != NULL && data[6] != NULL)
 	{
-		if (data[6][ft_strlen(data[6]) - 1] == '\n')
-			data[6][ft_strlen(data[6]) - 1] = '\0';
 		sphere->texture_map = map_create(data[6]);
 		if (data[7] != NULL)
 		{
@@ -62,7 +60,7 @@ t_sphere	*sphere_create(char **data)
 	sphere->color = NULL;
 	sphere->texture_map = NULL;
 	sphere->normal_map = NULL;
-	sphere->diameter = ascii_to_float(data[2]);
+	sphere->diameter = fabsf(ascii_to_float(data[2]));
 	sphere->specular = -1;
 	sphere->reflective = -1;
 	sphere_init(sphere, data);

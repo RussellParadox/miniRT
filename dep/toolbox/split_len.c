@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toolbox.h                                          :+:      :+:    :+:   */
+/*   split_len.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 08:34:09 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/10 16:35:08 by gdornic          ###   ########.fr       */
+/*   Created: 2024/02/10 16:32:42 by gdornic           #+#    #+#             */
+/*   Updated: 2024/02/10 16:33:28 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOOLBOX_H
-# define TOOLBOX_H
-# include <stdlib.h>
-# include <math.h>
+#include "toolbox.h"
 
-//array free
-void	array_free(void *root, unsigned int dimension);
+int	split_len(char **split)
+{
+	int	len;
 
-//ascii to float
-float	ascii_to_float(char *str);
-
-//str cmp
-int		str_cmp(char *s1, char *s2);
-
-//split len
-int		split_len(char **split);
-
-#endif
+	len = 0;
+	while (split[len] != NULL)
+		len++;
+	return (len);
+}

@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:33:07 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/31 17:41:59 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/10 16:37:46 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	camera_init(t_camera *camera, char **data)
 	array_free(split, 2);
 	if (camera->orientation == NULL)
 		return ;
+	*camera->orientation = vector_normalized(*camera->orientation);
 }
 
 t_camera	*camera_create(char **data)

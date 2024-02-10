@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:37:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/05 11:04:33 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/10 16:06:24 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static t_color	ray_trace(t_ray ray, t_list *scene, int depth)
 	normal = object_normal(closest.object, ray_point(ray, closest.parameter), ray.direction);
 	local_color = light_effect(normal, scene, closest, ray);
 	r = object_reflective(closest.object);
-	if (depth <= 0 || !(r > 0))
+	if (depth <= 0 || r < 0 || r > 1)
 		return (local_color);
 	ray.origin = ray_point(ray, closest.parameter);
 	ray.direction = vector_sub((t_vector){0, 0, 0}, ray.direction);
