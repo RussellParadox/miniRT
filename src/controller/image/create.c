@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 23:36:51 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/12 15:49:05 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:05:12 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ t_img	*image_create(t_mlx *mlx, int width, int height)
 		free(image);
 		return (NULL);
 	}
-	image->addr = mlx_get_data_addr(image->instance, &image->bits_per_pixel, &image->line_length, &image->endian);
+	image->addr = mlx_get_data_addr(image->instance, \
+	&image->bits_per_pixel, &image->line_length, &image->endian);
 	image->width = width;
 	image->height = height;
 	image->ratio = (float)width / height;

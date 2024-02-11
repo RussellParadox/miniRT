@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 17:46:03 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/05 12:12:26 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:12:49 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ t_vector	cylinder_height_tangeant(float r, float theta)
 
 t_vector	cylinder_tangeant(t_cylinder *cylinder, t_vector pc, float theta)
 {
-	if (2 * fabsf(vector_scalar_product(pc, *cylinder->axis)) + PRECISION > cylinder->height)
+	if (2 * fabsf(vector_scalar_product(pc, *cylinder->axis)) + \
+	PRECISION > cylinder->height)
 		return (cylinder_disc_tangeant(*cylinder->axis, pc));
 	return (cylinder_height_tangeant(cylinder->diameter / 2, theta));
 }

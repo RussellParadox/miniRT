@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:41:29 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/02 14:45:09 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:14:01 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 t_color	sphere_mapping(t_sphere *sphere, t_map *map, t_vector n)
 {
 	t_vector	local;
-	int		    u;
-	int		    v;
+	int			u;
+	int			v;
 
 	local.x = vector_scalar_product(n, sphere->base[0]);
 	local.y = vector_scalar_product(n, sphere->base[1]);

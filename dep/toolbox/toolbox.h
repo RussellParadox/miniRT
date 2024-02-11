@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 08:34:09 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/10 16:35:08 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:26:27 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,8 @@ int		str_cmp(char *s1, char *s2);
 
 //split len
 int		split_len(char **split);
+
+//capsule
+void	*capsule(void *data);
 
 #endif

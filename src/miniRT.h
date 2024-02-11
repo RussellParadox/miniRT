@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/10 19:06:46 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:31:36 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include <math.h>
 # include <toolbox.h>
 # include <float.h>
-# include <time.h>
 
 typedef struct s_vector
 {
@@ -428,14 +427,14 @@ t_vector	reflection(t_vector normal, t_vector d);
 
 /*->->->->intensity*/
 //light intensity
-t_vector	light_intensity(t_vector normal, t_list *scene, t_vector p, t_vector v, float s);
+t_vector	light_intensity(t_vector normal, t_list *scene, t_vector p, t_vector v);
 //ambient lightning
 t_vector	ambient_lightning_intensity(t_ambient_lightning *ambient_lightning);
 //light point
-t_vector	light_point_intensity(t_light *light, t_vector normal, t_vector v, t_vector l, float s);
+t_vector	light_point_intensity(t_light *light, t_vector normal, t_vector v, t_vector l);
 
 
-# define CAMERA_VIEWPORT_DISTANCE 1
+# define CAM_VP_DIST 1
 //method
 t_vector	ray_point(t_ray ray, float parameter);
 void	raytracing_method(t_img *canva, t_list *scene, t_viewport viewport);

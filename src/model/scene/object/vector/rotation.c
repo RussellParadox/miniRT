@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:03:45 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/31 17:52:21 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:15:37 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 float	vector_sin(t_vector v1, t_vector v2)
 {
-	return (vector_norm(vector_cross_product(v1, v2)) / (vector_norm(v1) * vector_norm(v2)));
+	return (vector_norm(vector_cross_product(v1, v2)) / \
+	(vector_norm(v1) * vector_norm(v2)));
 }
 
 float	vector_cos(t_vector v1, t_vector v2)
 {
-	return (vector_scalar_product(v1, v2) / (vector_norm(v1) * vector_norm(v2)));
+	return (vector_scalar_product(v1, v2) / \
+	(vector_norm(v1) * vector_norm(v2)));
 }
 
 //axis: axis of the rotation

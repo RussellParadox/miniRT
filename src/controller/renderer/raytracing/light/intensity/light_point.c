@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 03:58:34 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/25 16:26:14 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:33:12 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static float	diffuse_intensity(t_vector l, t_vector normal)
 	return (l_dot_n / vector_norm(l));
 }
 
-static float	specular_intensity(t_vector l, t_vector normal, t_vector v, float s)
+static float	specular_intensity(t_vector l, t_vector normal, \
+t_vector v, float s)
 {
 	t_vector	r;
 	float		r_dot_v;
@@ -36,12 +37,16 @@ static float	specular_intensity(t_vector l, t_vector normal, t_vector v, float s
 	return (0);
 }
 
-t_vector	light_point_intensity(t_light *light, t_vector normal, t_vector v, t_vector l, float s)
+t_vector	light_point_intensity(t_light *light, t_vector normal, \
+t_vector v, t_vector l)
 {
 	t_vector	intensity;
 	float		weight;
+	float		s;
 
-	weight = light->ratio * (diffuse_intensity(l, normal) + specular_intensity(l, normal, v, s));
+	s = *(float *)capsule(NULL);
+	weight = light->ratio * (diffuse_intensity(l, normal) \
+	+ specular_intensity(l, normal, v, s));
 	intensity.x = weight * light->color->red / light->color->sum;
 	intensity.y = weight * light->color->green / light->color->sum;
 	intensity.z = weight * light->color->blue / light->color->sum;

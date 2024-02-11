@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 23:14:43 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/04 00:02:11 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:45:55 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,10 @@ t_list	*scene_create(int fd)
 	}
 	if (errno == ENOMEM)
 		ft_lstclear(&scene, &object_free);
+	if (object_find("A", scene) == NULL || object_find("C", scene) == NULL)
+	{
+		ft_lstclear(&scene, &object_free);
+		put_error("Missing Ambiant lightning or Camera");
+	}
 	return (scene);
 }

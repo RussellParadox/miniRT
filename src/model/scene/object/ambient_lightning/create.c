@@ -6,13 +6,14 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 15:51:41 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/04 09:46:17 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:07:25 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static void	ambient_lightning_init(t_ambient_lightning *ambient_lightning, char **data)
+static void	ambient_lightning_init(t_ambient_lightning *ambient_lightning, \
+char **data)
 {
 	char	**split;
 

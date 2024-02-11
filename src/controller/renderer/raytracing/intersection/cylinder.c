@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 00:05:19 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/01 13:22:17 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 09:11:19 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static float	disc_diameter(t_ray ray, t_cylinder *cylinder, float parameter)
 	return (2 * vector_norm(p));
 }
 
-static float	height_intersection(t_ray ray, t_cylinder *cylinder, t_vector oc)
+static float	height_intersection(t_ray ray, \
+t_cylinder *cylinder, t_vector oc)
 {
 	float		parameter;
 	t_vector	v;
@@ -57,7 +58,9 @@ static float	height_intersection(t_ray ray, t_cylinder *cylinder, t_vector oc)
 	u.x = ray.direction.x - (s1 * cylinder->axis->x) / s2;
 	u.y = ray.direction.y - (s1 * cylinder->axis->y) / s2;
 	u.z = ray.direction.z - (s1 * cylinder->axis->z) / s2;
-	parameter = intersection_quadratic_minimum(vector_scalar_product(u, u), 2 * vector_scalar_product(v, u), vector_scalar_product(v, v) - powf(cylinder->diameter, 2) / 4, ray.parameter_min);
+	parameter = intersection_quadratic_minimum(vector_scalar_product(u, u), \
+	2 * vector_scalar_product(v, u), vector_scalar_product(v, v) - \
+	powf(cylinder->diameter, 2) / 4, ray.parameter_min);
 	if (height_length(ray, cylinder, parameter) > cylinder->height)
 		return (FLT_MAX);
 	return (parameter);
@@ -72,10 +75,12 @@ static float	disc_intersection(t_ray ray, t_cylinder *cylinder, t_vector oc)
 	directions_product = vector_scalar_product(ray.direction, *cylinder->axis);
 	if (fabsf(directions_product) < PRECISION)
 		return (FLT_MAX);
-	parameter1 = (cylinder->height - 2 * vector_scalar_product(oc, *cylinder->axis)) / (2 * directions_product);
+	parameter1 = (cylinder->height - 2 * vector_scalar_product(oc, \
+	*cylinder->axis)) / (2 * directions_product);
 	if (disc_diameter(ray, cylinder, parameter1) > cylinder->diameter)
 		parameter1 = FLT_MAX;
-	parameter2 = (-cylinder->height - 2 * vector_scalar_product(oc, *cylinder->axis)) / (2 * directions_product);
+	parameter2 = (-cylinder->height - 2 * vector_scalar_product(oc, \
+	*cylinder->axis)) / (2 * directions_product);
 	if (disc_diameter(ray, cylinder, parameter2) > cylinder->diameter)
 		parameter2 = FLT_MAX;
 	if (parameter1 < parameter2 && parameter1 > ray.parameter_min)

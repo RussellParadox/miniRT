@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 05:41:27 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/03 18:04:53 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:14:43 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ t_vector	cylinder_normal(t_cylinder *cylinder, t_vector intersection)
 	if (fabsf(fabsf(axis_projection_norm) - cylinder->height / 2) < PRECISION)
 		normal = cylinder_disc_normal(*cylinder->axis, rc);
 	else
-		normal = cylinder_height_normal(*cylinder->axis, rc, axis_projection_norm);
+		normal = cylinder_height_normal(*cylinder->axis, rc, \
+		axis_projection_norm);
 	norm = vector_norm(normal);
 	normal.x /= norm;
 	normal.y /= norm;

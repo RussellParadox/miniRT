@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:37:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/10 16:06:24 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 09:06:45 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static t_color	ray_trace(t_ray ray, t_list *scene, int depth)
 	closest = closest_intersection(ray, scene);
 	if (closest.object == NULL)
 		return ((t_color){0, 0, 0, 0});
-	normal = object_normal(closest.object, ray_point(ray, closest.parameter), ray.direction);
+	normal = object_normal(closest.object, \
+	ray_point(ray, closest.parameter), ray.direction);
 	local_color = light_effect(normal, scene, closest, ray);
 	r = object_reflective(closest.object);
 	if (depth <= 0 || r < 0 || r > 1)
@@ -79,16 +80,18 @@ void	raytracing_method(t_img *canva, t_list *scene, t_viewport viewport)
 	camera = (t_camera *)object_find("C", scene);
 	color = (t_color){0, 0, 0, 0};
 	ray.origin = *camera->coordinate;
-	ray.parameter_min = CAMERA_VIEWPORT_DISTANCE;
+	ray.parameter_min = CAM_VP_DIST;
 	x = -canva->width / 2;
 	while (x <= canva->width / 2)
 	{
 		y = -canva->height / 2;
 		while (y <= canva->height / 2)
 		{
-			ray.direction = ray_direction(camera->base, x * viewport.width_ratio, y * viewport.height_ratio, CAMERA_VIEWPORT_DISTANCE);
+			ray.direction = ray_direction(camera->base, x * \
+			viewport.width_ratio, y * viewport.height_ratio, CAM_VP_DIST);
 			color = ray_trace(ray, scene, 3);
-			canva_pixel_put(canva, x, y, trgb_create(0, color.red, color.green, color.blue));
+			canva_pixel_put(canva, x, y, trgb_create(0, color.red, \
+			color.green, color.blue));
 			y++;
 		}
 		x++;

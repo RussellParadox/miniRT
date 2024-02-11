@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 15:47:07 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/10 15:55:38 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:08:59 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,20 @@
 void	cylinder_map_init(t_cylinder *cylinder, char **data)
 {
 	t_plane		plane;
-	t_ray	    ray;
+	t_ray		ray;
 	float		t;
 
-	ray.origin = vector_sum((t_vector){cylinder->axis->y, -cylinder->axis->z, cylinder->axis->x}, *cylinder->coordinate);
+	ray.origin = vector_sum((t_vector){cylinder->axis->y, -cylinder->axis->z, \
+	cylinder->axis->x}, *cylinder->coordinate);
 	ray.direction = *cylinder->axis;
 	plane.coordinate = cylinder->coordinate;
 	plane.normal = cylinder->axis;
 	t = ray_plane_intersection(ray, &plane);
-	cylinder->base[2] = vector_normalized(vector_sub(ray_point(ray, t), *cylinder->coordinate));
+	cylinder->base[2] = vector_normalized(vector_sub(ray_point(ray, t), \
+	*cylinder->coordinate));
 	cylinder->base[1] = *cylinder->axis;
-	cylinder->base[0] = vector_normalized(vector_cross_product(cylinder->base[1], cylinder->base[2]));
+	cylinder->base[0] = vector_normalized(vector_cross_product(\
+	cylinder->base[1], cylinder->base[2]));
 	if (data[7] != NULL && data[8] != NULL)
 	{
 		cylinder->texture_map = map_create(data[8]);

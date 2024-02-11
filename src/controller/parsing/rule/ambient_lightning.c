@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 11:52:04 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/10 15:34:05 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 09:01:55 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	ambient_lightning_rule(char **data)
 {
-	static int	A_count = 0;
+	static int	a_count = 0;
 	int			data_len;
 	float		ratio;
 
-	A_count++;
-	if (A_count > 1)
+	a_count++;
+	if (a_count > 1)
 		return (put_error("Too many Ambient lightning"));
 	data_len = split_len(data);
 	if (data_len != 3)

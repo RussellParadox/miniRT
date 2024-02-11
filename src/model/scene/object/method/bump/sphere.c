@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:41:09 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/05 11:40:17 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:12:05 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,14 @@ t_vector	sphere_bump(t_sphere *sphere, t_vector n)
 	if (map == NULL)
 		return ((t_vector){0, 0, 0});
 	color = sphere_mapping(sphere, map, n);
-	bump = (t_vector){2.0 * color.red / 255 - 1, 2.0 * color.green / 255 - 1, -2.0 * color.blue / 255 - 1};
+	bump = (t_vector){2.0 * color.red / 255 - 1, \
+	2.0 * color.green / 255 - 1, -2.0 * color.blue / 255 - 1};
 	local.x = vector_scalar_product(n, sphere->base[0]);
 	local.y = vector_scalar_product(n, sphere->base[1]);
 	local.z = vector_scalar_product(n, sphere->base[2]);
 	local = vector_normalized(local);
-	//if (fabsf(local.y) < 0.00001)//PRECISION)
-	//	tbn[0] = cylinder_height_tangeant(sphere->diameter / 2, atan2f(local.z, local.x));
-	//else
-		tbn[0] = sphere_tangeant(sphere->diameter / 2, atan2f(local.z, local.x), asinf(-local.y) + M_PI / 2);
+	tbn[0] = sphere_tangeant(sphere->diameter / 2, atan2f(local.z, \
+	local.x), asinf(-local.y) + M_PI / 2);
 	tbn[1] = vector_normalized(vector_cross_product(tbn[0], local));
 	tbn[2] = local;
 	matrix_3x3_inverse(tbn);

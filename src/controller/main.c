@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:55:00 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/10 11:51:00 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 10:47:45 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	scene = scene_create(fd);
 	close(fd);
-	if (errno == ENOMEM)
+	if (errno == ENOMEM || scene == NULL)
 		return (EXIT_FAILURE);
 	status = controller_loop(scene);
 	ft_lstclear(&scene, &object_free);

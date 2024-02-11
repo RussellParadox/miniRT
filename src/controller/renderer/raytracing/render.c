@@ -6,14 +6,14 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:10:00 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/25 09:53:48 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 09:07:43 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 //horizontal_fov in radians
-t_viewport viewport_new(t_img *canva, float horizontal_fov, float distance)
+t_viewport	viewport_new(t_img *canva, float horizontal_fov, float distance)
 {
 	t_viewport	viewport;
 
@@ -30,6 +30,6 @@ void	raytracing_render(t_img *canva, t_list *scene)
 	t_camera	*camera;
 
 	camera = (t_camera *)object_find("C", scene);
-	viewport = viewport_new(canva, camera->fov * M_PI / 180, CAMERA_VIEWPORT_DISTANCE);
+	viewport = viewport_new(canva, camera->fov * M_PI / 180, CAM_VP_DIST);
 	raytracing_method(canva, scene, viewport);
 }

@@ -6,7 +6,7 @@
 #    By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 21:58:09 by gdornic           #+#    #+#              #
-#    Updated: 2024/02/10 19:07:04 by gdornic          ###   ########.fr        #
+#    Updated: 2024/02/11 09:41:03 by gdornic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC = 	$(addprefix view/, routine.c) \
 						$(addprefix intensity/, light_intensity.c ambient_lightning.c light_point.c) \
 						effect.c reflection.c) \
 					method.c render.c) \
-				draw_circle.c) \
+				) \
 			$(addprefix mlx/, create.c free.c) \
 			$(addprefix hook/, key.c routine.c loop_end.c) \
 			$(addprefix image/, \

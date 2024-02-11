@@ -6,13 +6,14 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 19:01:50 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/24 16:59:54 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/11 09:11:43 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-float	intersection_quadratic_minimum(register float a, register float b, register float c, float min)
+float	intersection_quadratic_minimum(register float a, \
+register float b, register float c, float min)
 {
 	float	parameter1;
 	float	parameter2;
