@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 07:56:32 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/12 11:17:58 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/12 11:52:22 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <errno.h>
 # include <math.h>
 # include <toolbox.h>
-# include <float.h>
 
 typedef struct s_vector
 {
