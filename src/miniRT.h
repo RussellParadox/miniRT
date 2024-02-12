@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef miniRT_H
-# define miniRT_H
+#ifndef MINIRT_H
+# define MINIRT_H
 # include <get_next_line.h>
 # include <libft.h>
 # include <libftprintf.h>
