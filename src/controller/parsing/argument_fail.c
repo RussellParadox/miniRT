@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:35:26 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/11 10:43:20 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/12 11:47:03 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	argument_fail(int argc, char *argv[])
 	int		result;
 
 	if (argc != 2)
-		return (put_error("miniRT need one and only argument."));
+		return (put_error("miniRT need one and only one argument."));
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (put_error("Can't open file"));

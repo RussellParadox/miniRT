@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:20:23 by gdornic           #+#    #+#             */
-/*   Updated: 2024/01/25 16:22:51 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/12 11:35:21 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_closest	closest_intersection(t_ray ray, t_list *scene)
 	t_obj		*closest_object;
 
 	closest_object = NULL;
-	closest_parameter = FLT_MAX;
+	closest_parameter = INFINITY;
 	while (scene != NULL)
 	{
 		object = scene->content;

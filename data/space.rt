@@ -1,8 +1,9 @@
-A 0.1 255,255,255
+A 0.3 255,255,255
 C 0,25,-10 0,0,1 90
 L 0,50,0 1 255,255,255
-sp 15,25,30 20 255,255,255 -1 -1 ./data/texture/8k_earth.xpm ./data/normal/earthbump1k_n.xpm
-sp -15,25,30 20 0,255,0 10 -1 ./data/texture/8k_earth.xpm
+sp 15,25,30 20 255,255,255 -1 0.7 ./data/texture/8k_earth.xpm ./data/normal/earthbump1k_n.xpm
+sp -15,25,30 20 0,255,0 10 0.5 ./data/texture/8k_earth.xpm
 sp 0,20,45 20 255,255,255 100 0.5 . ./data/normal/ondulation_n.xpm
 pl 0,0,0 0,1,0 255,255,0 1000 0.6 ./data/texture/checkerboard.xpm ./data/normal/checkerboard2_n.xpm
 pl 0,0,1000 0,0,-1 255,255,0 1000 -1 ./data/texture/stars.xpm
+cy -10,60,30 1,1,1 10 10 10,255,0 5000 -1 ./data/texture/checkerboard.xpm

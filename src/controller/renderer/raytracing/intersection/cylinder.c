@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 00:05:19 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/11 09:11:19 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/12 11:36:29 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_cylinder *cylinder, t_vector oc)
 	2 * vector_scalar_product(v, u), vector_scalar_product(v, v) - \
 	powf(cylinder->diameter, 2) / 4, ray.parameter_min);
 	if (height_length(ray, cylinder, parameter) > cylinder->height)
-		return (FLT_MAX);
+		return (INFINITY);
 	return (parameter);
 }
 
@@ -74,20 +74,20 @@ static float	disc_intersection(t_ray ray, t_cylinder *cylinder, t_vector oc)
 
 	directions_product = vector_scalar_product(ray.direction, *cylinder->axis);
 	if (fabsf(directions_product) < PRECISION)
-		return (FLT_MAX);
+		return (INFINITY);
 	parameter1 = (cylinder->height - 2 * vector_scalar_product(oc, \
 	*cylinder->axis)) / (2 * directions_product);
 	if (disc_diameter(ray, cylinder, parameter1) > cylinder->diameter)
-		parameter1 = FLT_MAX;
+		parameter1 = INFINITY;
 	parameter2 = (-cylinder->height - 2 * vector_scalar_product(oc, \
 	*cylinder->axis)) / (2 * directions_product);
 	if (disc_diameter(ray, cylinder, parameter2) > cylinder->diameter)
-		parameter2 = FLT_MAX;
+		parameter2 = INFINITY;
 	if (parameter1 < parameter2 && parameter1 > ray.parameter_min)
 		return (parameter1);
 	else if (parameter2 > ray.parameter_min)
 		return (parameter2);
-	return (FLT_MAX);
+	return (INFINITY);
 }
 
 float	ray_cylinder_intersection(t_ray ray, t_cylinder *cylinder)
@@ -105,5 +105,5 @@ float	ray_cylinder_intersection(t_ray ray, t_cylinder *cylinder)
 		return (parameter1);
 	else if (parameter2 > ray.parameter_min)
 		return (parameter2);
-	return (FLT_MAX);
+	return (INFINITY);
 }

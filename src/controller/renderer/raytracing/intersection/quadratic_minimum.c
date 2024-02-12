@@ -6,7 +6,7 @@
 /*   By: gdornic <gdornic@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 19:01:50 by gdornic           #+#    #+#             */
-/*   Updated: 2024/02/11 09:11:43 by gdornic          ###   ########.fr       */
+/*   Updated: 2024/02/12 11:37:11 by gdornic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ register float b, register float c, float min)
 
 	delta = powf(b, 2) - 4 * a * c;
 	if (delta < 0)
-		return (FLT_MAX);
+		return (INFINITY);
 	delta = sqrtf(delta);
 	parameter1 = (-b - delta) / (2 * a);
 	parameter2 = (-b + delta) / (2 * a);
@@ -30,5 +30,5 @@ register float b, register float c, float min)
 	else if (parameter2 > min)
 		return (parameter2);
 	else
-		return (FLT_MAX);
+		return (INFINITY);
 }
